@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
-import {SkillsComponent} from "./components/skills/skills.component";
+import {HomeComponent} from './pages/home/home.component';
 
-const routes: Routes = [
-  { path: "", component: MainComponent },
-  // { path: "skills", component: SkillsComponent },
+export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
