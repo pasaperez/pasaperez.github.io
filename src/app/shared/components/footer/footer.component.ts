@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import {MatIconModule} from '@angular/material/icon';
 import {LanguageService, PersonalData} from '../../../core/services/language.service';
 
 @Component({
@@ -17,7 +17,7 @@ import {LanguageService, PersonalData} from '../../../core/services/language.ser
           <a href="https://github.com/pasaperez" target="_blank" class="social-link">
             <mat-icon>code</mat-icon>
           </a>
-          <a href="https://github.com/pasaperez-slingr" target="_blank" class="social-link">
+          <a href="https://github.com/pasaperez-work" target="_blank" class="social-link">
             <mat-icon>work</mat-icon>
           </a>
           <a href="https://www.linkedin.com/in/pasaperez/" target="_blank" class="social-link">

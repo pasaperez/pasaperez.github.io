@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { MatDivider } from '@angular/material/divider';
-import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
-import { MatIcon } from '@angular/material/icon';
-import { MatChip, MatChipSet } from '@angular/material/chips';
-import { MatButton } from '@angular/material/button';
+import {Component, inject} from '@angular/core';
+import {MatDivider} from '@angular/material/divider';
+import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
+import {MatIcon} from '@angular/material/icon';
+import {MatChip, MatChipSet} from '@angular/material/chips';
+import {MatButton} from '@angular/material/button';
 import {LanguageService, PersonalData} from '../../core/services/language.service';
 
 @Component({
@@ -464,7 +464,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
               <mat-icon>work_outline</mat-icon>
               <div>
                 <strong>Work GitHub:</strong>
-                <a href="https://github.com/pasaperez-slingr" target="_blank">github.com/pasaperez-slingr</a>
+                <a href="https://github.com/pasaperez-work" target="_blank">github.com/pasaperez-work</a>
               </div>
             </div>
           </div>
