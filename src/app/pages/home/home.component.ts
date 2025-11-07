@@ -44,7 +44,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
               </div>
             </div>
             <div class="hero-actions">
-              <a mat-raised-button color="primary" class="cta-button" href="/Angel_Perez_CV.pdf" download="Angel_Perez_CV.pdf">
+              <a mat-raised-button color="primary" class="cta-button" href="/Angel_Perez_CV_2025.pdf" download="Angel_Perez_CV.pdf">
                 <mat-icon>download</mat-icon>
                 {{getTranslation('downloadCV')}}
               </a>

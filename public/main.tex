@@ -1,0 +1,297 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage{lmodern}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting - Espaciado ligeramente aumentado
+\titleformat{\section}{
+  \vspace{-2pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-3pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands - Ajustados para más espacio
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-1pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-3pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%\setlength{\itemsep}{0pt} % OPTIONAL TO REDUCE LINES
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge \scshape Angel Perez} \\ \vspace{2pt}
+    \small \textbf{Information Systems Engineer - University Systems Analyst}
+    --
+    \small \textbf{Backend Developer} \\ \vspace{2pt}
+    \small \href{tel:+542614699639}{\underline{+54 2614699639}} $|$ \href{mailto:pasaperez@yahoo.com.ar}{\underline{pasaperez@yahoo.com.ar}} $|$ 
+    \href{https://www.linkedin.com/in/pasaperez}{\underline{linkedin.com/in/pasaperez}} $|$
+    \href{https://github.com/pasaperez}{\underline{github.com/pasaperez}}
+\end{center}
+
+
+\section{Summary}
+I am an Information Systems Engineer and Backend Developer with over 7 years of experience designing, modernizing, and maintaining scalable, enterprise-grade web applications. I combine a strong foundation in Full-Stack development, DevOps methodologies, and secure software engineering with proven leadership in establishing coding standards and mentoring high-performing backend and full-stack teams. Specialized in CI/CD processes, production environment management, and delivering robust solutions that significantly improve system availability, drive operational efficiency, and create long-term business value.
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages \& Runtimes}{: Java, JavaScript/TypeScript (NodeJS, V8, Bun), C/C++, Python, R, Dart} \\[3pt]
+     \textbf{Backend \& Testing}{: Spring, Hibernate, Express, Sequelize, Mongoose, Jest, JUnit} \\[3pt]
+     \textbf{Frontend}{: Angular, React, DurandalJS, Knockout, Thymeleaf, HTML/CSS, AlpineJS, Bootstrap, Flutter} \\[3pt]
+     \textbf{Databases}{: MySQL, MariaDB, PostgreSQL, MS SQL Server, SQLite, H2, MongoDB, DynamoDB, Firestore} \\[3pt]
+     \textbf{DevOps \& Cloud}{: Git, Docker, Kubernetes, Jenkins, Selenium, GCP, AWS, OpenShift, Groovy} \\[3pt]
+     \textbf{Architecture \& Patterns}{: Microservices, Event-driven, REST APIs, MVC, DDD, TDD, BDD, OOP} \\[3pt]
+     \textbf{Methodologies}{: Agile (Scrum, Kanban), CI/CD Pipelines, Gitflow, Code Review, Clean Code, DevOps}
+    }}
+ \end{itemize}
+
+%-----------EXPERIENCE-----------
+\section{Professional Experience}
+
+\resumeSubheading
+  {Lead Developer}{May 2023 -- Present}
+  {Pasaperez Asoc. Simple}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Led the design and development of two core systems, overseeing architecture, implementation, and deployment processes.}
+    \resumeItem{Directed the creation of an exchange integration platform, ensuring efficient data processing and reliable communication between backend services.}
+    \resumeItem{Supervised the development of a video analysis and categorization system powered by AI models, driving innovation and automation within the organization.}
+    \resumeItem{Ensured code quality, scalability, and adherence to best practices across backend and frontend development teams.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Backend Technical Expert / Chief Operations Engineer}{Aug 2024 -- Present}
+  {Slingr}{US-based company/Remote, Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Served as technical reference for the backend team, leading the design and implementation of complex solutions while ensuring technical quality.}
+    \resumeItem{Conducted code reviews to ensure deliverables met quality standards, best practices, and established processes.}
+    \resumeItem{Managed CI/CD pipelines, supervised cloud infrastructure, and implemented automation processes to optimize deployment workflows.}
+    \resumeItem{Proposed and implemented improvements in key areas such as quality, productivity, and internal team processes.}
+    \resumeItem{Collaborated in project planning, risk identification, and technical resource allocation.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Full-Stack Developer}{Nov 2024 -- Present}
+  {Slingr}{US-based company/Remote, Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Led the development of new full-stack features within the slingr framework and platform, leveraging Angular, React and TypeScript to enhance user experience and backend performance.}
+    \resumeItem{Implemented modular front-end components and RESTful APIs, ensuring scalability and maintainability across projects.}
+    \resumeItem{Collaborated with cross-functional teams to integrate DevOps practices, automate deployments, and improve CI/CD pipelines.}
+    \resumeItem{Contributed to architecture modernization efforts, introducing best practices in code quality, security, documentation, and testing.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Systems Engineer / Backend Developer}{Dec 2022 -- Oct 2024}
+  {Slingr}{US-based company/Remote, Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Designed, developed, and maintained key integrations for the slingr platform, ensuring interoperability between services using Java and Node.js.}
+    \resumeItem{Delivered internal tech talks on platform architecture and best practices, fostering knowledge sharing across engineering teams.}
+    \resumeItem{Worked on core platform components including database management, load balancing, and performance optimization.}
+    \resumeItem{Developed and optimized applications within the platform, focusing on new functionalities, APIs, and performance improvements.}
+    \resumeItem{Provided comprehensive technical support, ensuring platform availability and stability for 5,000+ users.}
+  \resumeItemListEnd
+  
+  \resumeSubheading
+  {Fullstack Software Developer}{Nov 2021 -- Aug 2022}
+  {Software del Sur}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Participated in the development of multiple web platforms including clinical, commercial, and operational management systems.}
+    \resumeItem{Developed interfaces for integrations with commercial services using NodeJS (Backend), Angular 8+ (Frontend), and MySQL/MariaDB.}
+    \resumeItem{Mentored 5 junior developers, establishing coding standards and conducting code reviews to ensure quality deliverables.}
+    \resumeItem{Implemented version control with Git/Bitbucket and managed project requirements with Trello.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Functional Analyst \& Software Developer}{Mar 2020 -- Aug 2022}
+  {Pasaperez Asoc. Simple (Concurrent)}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Conducted analysis, design, and development of Content Management System for public administration clients.}
+    \resumeItem{Utilized Java/Spring/NodeJS (Backend), Angular 14/HTML/JS/CSS/Thymeleaf (Frontend), MS SQL Server, MongoDB (Database).}
+    \resumeItem{Deployed solutions using Kubernetes/OpenFaaS on Google Kubernetes Engine (GCP).}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Systems Engineer}{Mar 2021 -- Dec 2021}
+  {Grupo Metacod (Concurrent)}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Led project management, analysis, design, development, testing, and implementation of a Code Generator System with Web Modeler.}
+    \resumeItem{Co-authored Metacod System paper presented at 9th National Congress of Computer Engineering (CoNaIISI 2021).}
+    \resumeItem{Implemented technology stack: Java/Spring (Backend), ReactJS/HTML/JS/CSS (Frontend), MS SQL Server (Database), Docker (Deployment on Amazon ECS).}
+  \resumeItemListEnd
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Universidad Tecnológica Nacional}{Mendoza, Argentina}
+      {Engineering Degree, Information Systems Engineering}{Mar 2014 -- Aug 2022}
+    \resumeSubheading
+      {Universidad Tecnológica Nacional}{Mendoza, Argentina}
+      {Degree, University Systems Analyst}{Mar 2014 -- Aug 2022}
+  \resumeSubHeadingListEnd
+
+%-----------PUBLICATIONS & CERTIFICATIONS-----------
+\section{Publications \& Certifications}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {9th National Congress of Computer Engineering (CoNaIISI 2021)}{2021}
+    {Co-author of Metacod System research paper}{Argentina}
+  \resumeSubheading
+    {Introduction to Front-end Development with ReactJS}{2020}
+    {Professional Certification}{Online}
+  \resumeSubheading
+    {Blockchain and Bitcoin Principles}{2020}
+    {Professional Certification}{Online}
+\resumeSubHeadingListEnd
+
+%-----------LANGUAGES-----------
+\section{Languages}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+   \textbf{Spanish}: Native \quad $|$ \quad
+   \textbf{English}: Intermediate (B2/C1) \quad $|$ \quad
+   \textbf{German}: Basic (A1) \quad $|$ \quad
+   \textbf{Italian}: Basic (A1)
+  }}
+\end{itemize}
+
+%-----------KEY ACHIEVEMENTS-----------
+\section{Key Projects \& Achievements}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{Slingr Platform Modernization} $|$ \emph{Java, Angular, MongoDB, CI/CD}}{2022 -- Present}
+    \resumeItemListStart
+      \resumeItem{Led comprehensive platform migration from Java 8 to Java 24, serving 5,000+ active users with enhanced performance and security compliance.}
+      \resumeItem{Achieved 30-7000\% performance optimization across multiple core platform processes through architectural improvements and code refactoring.}
+      \resumeItem{Orchestrated frontend migration from DurandalJS to Angular and database upgrade from MongoDB 4 to 8, ensuring low-downtime deployment.}
+      \resumeItem{Reduced CI/CD build times by 83\% through pipeline optimization and automation improvements.}
+      \resumeItem{Successfully achieved HIPAA and SOC 2 security certifications, implementing formal delivery and deployment processes for releases and hotfixes.}
+      \resumeItem{Mentored and led a cross-functional team of up to 15 developers, establishing coding standards and best practices.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Metacod Code Generator System} $|$ \emph{Java/Spring, ReactJS, Docker, AWS}}{2021}
+    \resumeItemListStart
+      \resumeItem{Designed and implemented a web-based code generation system that reduced project initialization time in software factories by 97\% (from 4 months to 1 week) across 4 enterprise projects.}
+      \resumeItem{Co-authored and presented research paper at the 9th National Congress of Computer Engineering (CoNaIISI 2021).}
+    \resumeItemListEnd
+
+    \resumeProjectHeading
+    {\textbf{AI-Powered Video Classification System} $|$ \emph{Bun, AI/ML, Microservices, Benchmarking}}{2025 -- Ongoing}
+    \resumeItemListStart
+      \resumeItem{Designed and implemented an automated classification system capable of processing up to 8,000 videos and over 500 hours of footage using advanced AI models.}
+      \resumeItem{Conducted extensive performance benchmarking to optimize dedicated task execution, achieving significant reductions in computational time and resource utilization.}
+      \resumeItem{Engineered the microservices architecture for data processing, ensuring high throughput, scalability, and reliable communication across backend services.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Elixir Framework (Personal Project)} $|$ \emph{Open Source, Microservices}}{Ongoing}
+    \resumeItemListStart
+      \resumeItem{Developed a wrapper framework to simplify microservices development for CRUD operations in REST APIs, accelerating development cycles.}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------PROFESSIONAL INTERESTS-----------
+\section{Professional Interests}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+   Open to opportunities in: \textbf{Backend Engineering} $|$ \textbf{Full-Stack Development} $|$ \textbf{Technical Leadership} $|$ \textbf{Platform Engineering} $|$ \textbf{DevOps/SRE}
+  }}
+\end{itemize}
+%-------------------------------------------
+\end{document}
