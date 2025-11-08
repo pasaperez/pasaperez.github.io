@@ -1,0 +1,3 @@
+[submodule "public/pasaperez"]
+	path = public/pasaperez
+	url = git@github.com:pasaperez/pasaperez.git
