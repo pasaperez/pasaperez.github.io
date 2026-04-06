@@ -39,6 +39,5 @@ mvnw.cmd
 /joyel/joyel.iml
 library.log
 /frontend/esplendor/.angular/
-/frontend/nubilis/.env
 **/package-lock.json
 **/node_modules
