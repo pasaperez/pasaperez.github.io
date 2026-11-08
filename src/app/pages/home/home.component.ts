@@ -44,7 +44,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
               </div>
             </div>
             <div class="hero-actions">
-              <a mat-raised-button color="primary" class="cta-button" href="/Angel_Perez_CV_2026.pdf" download="Angel_Perez_CV.pdf">
+              <a mat-raised-button color="primary" class="cta-button" [href]="cvFile" [attr.download]="cvDownloadName">
                 <mat-icon>download</mat-icon>
                 {{getTranslation('downloadCV')}}
               </a>
@@ -1377,6 +1377,14 @@ export class HomeComponent {
 
   public collapseAll(): void {
     this.allExpanded = false;
+  }
+
+  protected get cvFile(): string {
+    return this.languageService.getCurrentLanguage() === 'es' ? '/Angel_Perez_CV_2026_ES.pdf' : '/Angel_Perez_CV_2026.pdf';
+  }
+
+  protected get cvDownloadName(): string {
+    return this.languageService.getCurrentLanguage() === 'es' ? 'Angel_Perez_CV_ES.pdf' : 'Angel_Perez_CV_EN.pdf';
   }
 
   public getTranslation(key: keyof PersonalData): string {

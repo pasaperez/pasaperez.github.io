@@ -41,3 +41,4 @@ library.log
 /frontend/esplendor/.angular/
 **/package-lock.json
 **/node_modules
+.angular/

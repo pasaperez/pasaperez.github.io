@@ -142,7 +142,8 @@ pasaperez.github.io/
 │   └── styles.css             # Estilos globales
 ├── public/
 │   ├── perfil.jpg             # Imagen de perfil
-│   ├── Angel_Perez_CV_2026.pdf  # CV descargable (compilado desde main.tex)
+│   ├── Angel_Perez_CV_2026.pdf     # CV en inglés (compilado desde main.tex)
+│   ├── Angel_Perez_CV_2026_ES.pdf  # CV en español (compilado desde main.es.tex)
 │   └── favicon.ico            # Icono del sitio
 ├── angular.json               # Configuración de Angular
 ├── package.json               # Dependencias del proyecto
