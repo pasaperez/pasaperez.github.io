@@ -1,112 +1,74 @@
 import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {LanguageService, PersonalData} from '../../../core/services/language.service';
+import {LanguageService, PageContent} from '../../../core/services/language.service';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'footer[app-footer]',
   standalone: true,
+  host: {class: 'footer closing footer--statement g2m', id: 'contact', 'aria-labelledby': 'close-h'},
   template: `
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-info">
-          <p class="footer-text">{{ getTranslation('pageFooter') }}</p>
-          <p class="footer-date">{{ currentYear }}</p>
-        </div>
-
-        <div class="social-links">
-          <a href="https://github.com/pasaperez" target="_blank" class="social-link">
-            <mat-icon>code</mat-icon>
-          </a>
-          <a href="https://github.com/pasaperez-work" target="_blank" class="social-link">
-            <mat-icon>work</mat-icon>
-          </a>
-          <a href="https://www.linkedin.com/in/pasaperez/" target="_blank" class="social-link">
-            <mat-icon>business</mat-icon>
-          </a>
-          <a href="mailto:pasaperez@yahoo.com.ar" class="social-link">
-            <mat-icon>mail</mat-icon>
-          </a>
+    <div class="wrap">
+      <div class="closing__cta close--type">
+        <div class="grid close__grid">
+          <div class="span-6 close__text">
+            <div class="section-head">
+              <h2 id="close-h">{{ c.close.h2 }}</h2>
+              <p>{{ c.close.line }}</p>
+            </div>
+            <a class="btn btn--primary" [href]="c.cv.file" [attr.download]="c.cv.downloadName">{{ c.cv.label }}<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          </div>
+          <div class="span-6 start-7 frame frame--photo close__cv">
+            <img class="frame__img" [src]="c.close.preview" [alt]="c.close.previewAlt" width="720" height="850" loading="lazy" data-source="client">
+          </div>
         </div>
       </div>
-    </footer>
+      <div class="closing__links">
+        <div class="grid">
+          <div class="span-4 stack-4">
+            <a class="nav__logo" [href]="here + '#top'"><span class="mark" data-mark="deploy" aria-hidden="true"></span>Angel Perez</a>
+            <p class="footer__lede">{{ c.footer.lede }}</p>
+          </div>
+          <div class="span-2 footer__col">
+            <h3>{{ c.footer.sectionsTitle }}</h3>
+            <ul>
+              <li><a [href]="here + '#proyectos'">{{ c.nav.projects }}</a></li>
+              <li><a [href]="here + '#experiencia'">{{ c.nav.experience }}</a></li>
+              <li><a [href]="here + '#tecnologias'">{{ c.nav.stack }}</a></li>
+              <li><a [href]="here + '#formacion'">{{ c.nav.education }}</a></li>
+            </ul>
+          </div>
+          <div class="span-3 footer__col">
+            <h3>{{ c.footer.contactTitle }}</h3>
+            <ul>
+              <li><a href="mailto:pasaperez@yahoo.com.ar">pasaperez&#64;yahoo.com.ar</a></li>
+              <li><a href="mailto:angel.pasaperez@gmail.com">angel.pasaperez&#64;gmail.com</a></li>
+            </ul>
+          </div>
+          <div class="span-3 footer__col">
+            <h3>{{ c.footer.profilesTitle }}</h3>
+            <ul>
+              <li><a href="https://www.linkedin.com/in/pasaperez/" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://github.com/pasaperez" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://github.com/pasaperez-work" target="_blank" rel="noopener">{{ c.footer.workGithub }}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__legal">
+          <span>&copy; {{ currentYear }} Angel Santiago Perez. {{ c.footer.built }}</span>
+          <span>{{ c.footer.trademarks }}</span>
+        </div>
+      </div>
+    </div>
   `,
-  imports: [MatIconModule],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styles: [`
-    .footer {
-      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-      color: white;
-      padding: 2rem 0;
-      margin-top: 4rem;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-info {
-      flex: 1;
-    }
-
-    .footer-text {
-      margin: 0 0 0.5rem 0;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    .footer-date {
-      margin: 0;
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .social-link:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-2px);
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      .footer-content {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-      }
-
-      .footer-text {
-        font-size: 0.8rem;
-      }
-    }
-  `]
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class FooterComponent {
   private languageService: LanguageService = inject(LanguageService);
+  protected get here(): string {
+    return this.languageService.path();
+  }
   protected currentYear: number = new Date().getFullYear();
 
-  public getTranslation(key: keyof PersonalData): string {
-    return this.languageService.getTranslation(key);
+  protected get c(): PageContent {
+    return this.languageService.content();
   }
 }

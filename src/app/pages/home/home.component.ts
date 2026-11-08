@@ -1,1393 +1,322 @@
 import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
-import {MatDivider} from '@angular/material/divider';
-import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
-import {MatIcon} from '@angular/material/icon';
-import {MatChip, MatChipSet} from '@angular/material/chips';
-import {MatButton} from '@angular/material/button';
-import {LanguageService, PersonalData} from '../../core/services/language.service';
+import {LanguageService, PageContent, SkillGroup} from '../../core/services/language.service';
+import {Tool, TOOLS, ToolId} from './tools';
 
 @Component({
-  selector: 'app-home',
+  selector: 'main[app-home]',
   standalone: true,
-  imports: [
-    MatDivider,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatIcon,
-    MatChip,
-    MatChipSet,
-    MatButton
-  ],
+  host: {id: 'top'},
   template: `
-    <div class="portfolio-container">
-      <section class="hero-section">
-        <div class="hero-content">
-          <div class="profile-image">
-            <img src="/perfil.jpg" alt="{{getTranslation('name')}}">
+    <section class="hero hero--collage" data-enter aria-labelledby="hero-h">
+      <div class="wrap"><div class="hero-text grid hero__grid">
+        <div class="hero__text span-5">
+          <h1 id="hero-h">{{ c.hero.name }} <span class="hero__role">{{ c.hero.role }}</span></h1>
+          <p class="hero__lead">{{ c.hero.lead }}</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" [href]="c.cv.file" [attr.download]="c.cv.downloadName">{{ c.cv.label }}<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+            <a class="btn btn--secondary" href="mailto:pasaperez@yahoo.com.ar">{{ c.email }}</a>
           </div>
-          <div class="hero-text">
-            <h1>{{getTranslation('name')}}</h1>
-            <h2>{{getTranslation('title')}}</h2>
-            <p class="hero-description">{{getTranslation('aboutMeDescription')}}</p>
-            <div class="hero-stats">
-              <div class="stat">
-                <span class="stat-number">{{getTranslation('experienceYears')}}</span>
-                <span class="stat-label">{{getTranslation('yearsExp')}}</span>
+          <p class="hero__proof"><img class="hero__avatar" src="/perfil.jpg" alt="" width="40" height="40"><span>@for (fact of c.hero.proof; track fact; let last = $last) {{{ fact }}@if (!last) {<i class="hero__sep" aria-hidden="true"> · </i>}}</span></p>
+        </div>
+        <div class="hero__art span-6 start-7" data-fx="grain-gradient" data-fx-seed="11" role="img" [attr.aria-label]="c.hero.art">
+          <div class="ly-piece ly-piece--main" aria-hidden="true" data-ui-loop>
+            <div class="ui ui-panel ui-pipe" data-ui="pipeline-board">
+              <div class="ui-pipe__head">
+                <svg class="ui-icon ui-pipe__branch" viewBox="0 0 16 16" aria-hidden="true"><circle cx="4.5" cy="3.5" r="1.5"/><circle cx="4.5" cy="12.5" r="1.5"/><circle cx="11.5" cy="5" r="1.5"/><path d="M4.5 5v6M11.5 6.5c0 2.6-2.2 3.6-5.6 4.6"/></svg>
+                <span class="ui-pipe__repo">{{ c.hero.pipe.repo }}</span><i class="ui-pipe__slash">/</i><code class="ui-pipe__ref">main</code>
+                <span class="ui-spacer"></span>
+                <span class="ui-pipe__total"><span data-pipe-total>{{ c.hero.pipe.live }}</span></span>
+                <span class="ui-chip ui-chip--ink ui-chip--live ui-pipe__chip" data-pipe-chip [attr.data-done]="c.hero.pipe.passed">{{ c.hero.pipe.running }}</span>
               </div>
-              <div class="stat">
-                <span class="stat-position">{{getTranslation('currentPosition')}}</span>
-                <span class="stat-company">{{getTranslation('currentCompany')}}</span>
+              <div class="ui-pipe__commit">
+                <span class="ui-avatar" data-tone="4">AP</span>
+                <span class="ui-pipe__msg">{{ c.hero.pipe.commit }}</span>
+                <span class="ui-spacer"></span>
+                <button class="ui-btn ui-btn--ghost ui-btn--sm ui-pipe__btn" type="button" tabindex="-1" data-pipe-btn [attr.data-done]="c.hero.pipe.rerun">{{ c.hero.pipe.cancel }}</button>
               </div>
-              <div class="stat">
-                <span class="stat-work">{{getTranslation('workingRemotely')}}</span>
-              </div>
+              <ol class="ui-pipe__steps">
+                @for (step of c.hero.pipe.steps; track step.name; let i = $index) {
+                  <li class="ui-pipe__step" [class.is-run]="i === 0" [attr.style]="i === 0 ? '--k:0' : null" [attr.data-step]="'s' + i"><span class="ui-pipe__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img [src]="pipeIcon(i)" alt="" width="14" height="14"></span><span class="ui-pipe__nm">{{ step.name }}</span></span><code class="ui-pipe__cmd">{{ step.cmd }}</code><span class="ui-pipe__time" [attr.data-time]="c.hero.pipe.done">{{ i === 0 ? c.hero.pipe.live : c.hero.pipe.queued }}</span><span class="ui-pipe__bar"><i></i></span></li>
+                }
+              </ol>
             </div>
-            <div class="hero-actions">
-              <a mat-raised-button color="primary" class="cta-button" [href]="cvFile" [attr.download]="cvDownloadName">
-                <mat-icon>download</mat-icon>
-                {{getTranslation('downloadCV')}}
-              </a>
-              <a mat-stroked-button class="contact-button" href="mailto:pasaperez@yahoo.com.ar" target="_blank">
-                <mat-icon>mail</mat-icon>
-                {{getTranslation('contact')}}
-              </a>
+          </div>
+          <div class="hero-card hero__identity" aria-hidden="true">
+            <img class="hero-card__photo" src="/perfil.jpg" alt="" width="96" height="96">
+            <div class="hero-card__text">
+              <b>Angel Santiago Perez</b>
+              <span>{{ c.hero.card.role }}</span>
+              <span class="hero-card__meta">{{ c.hero.card.place }}</span>
             </div>
           </div>
         </div>
-      </section>
+      </div></div>
+    </section>
 
-      <mat-divider class="section-divider"></mat-divider>
-
-      <section class="about-section">
-        <div class="section-header">
-          <h3>{{getTranslation('about')}}</h3>
-        </div>
-        <div class="about-content">
-          <div class="about-text">
-            <p>{{getTranslation('specializedIn')}}</p>
+    <section class="section g2" id="proyectos" aria-labelledby="proyectos-h">
+      <div class="wrap">
+        <div class="group">
+          <div class="section-head">
+            <h2 id="proyectos-h">{{ c.projects.h2 }} <span class="muted">{{ c.projects.muted }}</span></h2>
           </div>
-          <div class="key-strengths">
-            <h4>{{getTranslation('keyStrengths')}}</h4>
-            <mat-chip-set>
-              <mat-chip>{{getTranslation('backendTech')}}</mat-chip>
-              <mat-chip>{{getTranslation('devOps')}}</mat-chip>
-              <mat-chip>{{getTranslation('methodologies')}}</mat-chip>
-              <mat-chip>{{getTranslation('softSkills')}}</mat-chip>
-            </mat-chip-set>
+          <div class="grid">
+            <article class="card card--row span-6 m-nolift">
+              <h3>{{ c.projects.cards[0].title }}</h3>
+              <p>{{ c.projects.cards[0].text }}</p>
+              <div class="panel panel--flush"><div class="dg" data-ui-loop [attr.data-diagram]="vbDiagram()"></div></div>
+            </article>
+            <article class="card card--row span-6 m-nolift">
+              <h3>{{ c.projects.cards[1].title }}</h3>
+              <p>{{ c.projects.cards[1].text }}</p>
+              <div class="panel panel--flush"><div class="dg" data-ui-loop [attr.data-diagram]="wepaDiagram()"></div></div>
+            </article>
           </div>
         </div>
-      </section>
-
-      <mat-divider class="section-divider"></mat-divider>
-
-      <section class="experience-section">
-        <div class="section-header">
-          <h3>{{getTranslation('professionalExperience')}}</h3>
+        <div class="grid">
+          <article class="card card--row span-6 m-nolift">
+            <h3>{{ c.projects.cards[2].title }}</h3>
+            <p>{{ c.projects.cards[2].text }}</p>
+            <div class="panel panel--flush">
+              <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:64px;--ay-sm:24px">
+                <div class="ui ui-panel ui-checks" data-ui="checklist" data-ui-loop>
+                  <div class="ui-checks__head">
+                    <div class="ui-title">{{ c.projects.devflow.title }}</div>
+                    <span class="ui-spacer"></span>
+                    <div class="ui-meta" data-checks-count>{{ c.projects.devflow.count }}</div>
+                  </div>
+                  <div class="ui-checks__bar"><i data-checks-bar style="--k:0.4"></i></div>
+                  <ul class="ui-checks__list">
+                    @for (item of c.projects.devflow.items; track item; let i = $index) {
+                      <li class="ui-check" [class.is-done]="i < 2"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">{{ item }}</span></li>
+                    }
+                  </ul>
+                </div>
+              </div></div>
+            </div>
+          </article>
+          <article class="card card--row span-6 m-nolift">
+            <h3>{{ c.projects.cards[3].title }}</h3>
+            <p>{{ c.projects.cards[3].text }}</p>
+            <div class="panel panel--flush">
+              <div class="stage"><div class="at-rise fit" style="--fit-max:480px;--ax:max(24px, 50% - 240px);--ay:36px;--ay-sm:24px">
+                <div class="ui ui-panel ui-term" data-ui="terminal-run" data-ui-loop>
+                  <div class="ui-term__head">
+                    <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="ui-term__title">{{ c.projects.qaflow.repo }}</span>
+                    <span class="ui-meta">claude</span>
+                    <span class="ui-spacer"></span>
+                    <span class="ui-chip ui-chip--plain ui-term__branch">main</span>
+                  </div>
+                  <div class="ui-term__screen" data-term-screen>
+                    <div class="ui-term__track" data-term-track>
+                      <div class="ui-term__ln ui-term__cmd"><span class="ui-term__cwd">~/{{ c.projects.qaflow.repo }}</span><span class="ui-term__sig">&gt;</span><span class="ui-term__typed" data-term-cmd>{{ c.projects.qaflow.cmd }}</span></div>
+                      <div class="ui-term__ln ui-term__meter" data-term-out data-term-meter><span class="ui-term__bar" style="--p:1"><i></i></span><span class="ui-term__count" data-term-count>{{ c.projects.qaflow.steps.length }} / {{ c.projects.qaflow.steps.length }}</span></div>
+                      @for (step of c.projects.qaflow.steps; track step.stage) {
+                        <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path qa-stage">{{ step.stage }}</span><span class="ui-term__dim">{{ step.what }}</span></div>
+                      }
+                      <div class="ui-term__ln ui-term__gap" data-term-out aria-hidden="true"></div>
+                      <div class="ui-term__ln ui-term__sum" data-term-out><span class="ui-term__key">{{ c.projects.qaflow.suite }}</span><span class="ui-term__val">{{ c.projects.qaflow.result }}</span></div>
+                      <div class="ui-term__ln ui-term__done" data-term-out data-term-done><span class="ui-term__ok"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.3 2.4 2.4 4.6-5"/></svg></span><b>{{ c.projects.qaflow.done }}</b></div>
+                      <div class="ui-term__ln ui-term__cmd" data-term-next><span class="ui-term__cwd">~/{{ c.projects.qaflow.repo }}</span><span class="ui-term__sig">&gt;</span><span class="ui-term__typed"></span><i class="ui-term__caret" aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div></div>
+            </div>
+          </article>
         </div>
-        <div class="experience-timeline">
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>{{getTranslation('vistobueno_title')}}</h4>
-              <h5><a href="https://vistobueno.tech" target="_blank" rel="noopener">{{getTranslation('vistobueno_company')}}</a></h5>
-              <span class="period">2026</span>
-              <p>{{getTranslation('vistobueno_location')}}</p>
-              <ul>
-                <li>{{getTranslation('vistobueno_desc1')}}</li>
-                <li>{{getTranslation('vistobueno_desc2')}}</li>
-                <li>{{getTranslation('vistobueno_desc3')}}</li>
-                <li>{{getTranslation('vistobueno_desc4')}}</li>
+      </div>
+    </section>
+
+    <section class="section statement" id="enfoque" data-moment="letters-assemble" data-moment-opts='{"spread": 0.8, "from": 0.95, "to": -0.15}' aria-labelledby="enfoque-h">
+      <div class="wrap">
+        <h2 class="mo-la__type" id="enfoque-h">{{ c.focus.h2 }}</h2>
+        <p class="mo-la__sub">{{ c.focus.sub }}</p>
+        <dl class="grid focus__stats">
+          @for (stat of c.focus.stats; track stat.label) {
+            <div class="span-4 focus__stat"><dt>{{ stat.label }}</dt><dd class="t-stat">{{ stat.value }}</dd></div>
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="experiencia" style="--hm: 2" aria-labelledby="experiencia-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="experiencia-h">{{ c.experience.h2 }} <span class="muted">{{ c.experience.muted }}</span></h2>
+        </div>
+        <ul class="rows jobs">
+          @for (job of c.experience.jobs; track job.title) {
+            <li>
+              <span class="rows__name">{{ job.title }}
+                <span class="jobs__where">
+                  @if (job.companyUrl) {
+                    <a class="link" [href]="job.companyUrl" target="_blank" rel="noopener">{{ job.company }}</a>
+                  } @else {
+                    {{ job.company }}
+                  }
+                  · {{ job.place }}
+                </span>
+              </span>
+              <p>{{ job.text }}</p>
+              <span class="rows__value"><span class="year">{{ job.years }}</span></span>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section ground-surface" id="tecnologias" style="--hm: 2" data-moment="iris-opens" data-moment-opts='{"from": "base", "start": 0.95, "end": 0.1, "ease": "linear"}' aria-labelledby="tecnologias-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="tecnologias-h">{{ toolCount() }} {{ c.stack.h2 }}. <span class="muted">{{ c.stack.muted }}</span></h2>
+        </div>
+        <div class="grid tech">
+          @for (group of c.stack.groups; track group.name) {
+            <div class="tech__group span-3" role="group" [attr.aria-label]="group.name">
+              <div class="tech__head"><p class="tech__name">{{ group.name }}</p><span class="tech__count">{{ group.tools.length }}</span></div>
+              <ul class="tech__top">
+                @for (t of tools(group.tools.slice(0, 4)); track t.name) {
+                  <li>
+                    @if (t.icon) {
+                      <span class="ic-tile ic-tile--40"><img [class]="'ic ' + t.shape" [src]="t.icon" alt="" width="24" height="24" loading="lazy"></span>
+                    } @else {
+                      <span class="ic-tile ic-tile--40 ic-tile--accent"><span class="ic ic-mask ic-20" [attr.style]="'--m:' + t.glyph"></span></span>
+                    }
+                    {{ t.name }}
+                  </li>
+                }
+              </ul>
+              @if (rest(group).length) {
+                <p class="tech__also"><span class="t-label">{{ c.stack.also }}</span> {{ rest(group) }}</p>
+              }
+            </div>
+          }
+          @for (m of c.stack.methods; track m.label) {
+            <div class="tech__group tech__group--words span-3" role="group" [attr.aria-label]="m.label">
+              <div class="tech__head"><p class="tech__name">{{ m.label }}</p><span class="tech__count">{{ m.items.length }}</span></div>
+              <ul class="tech__words">
+                @for (item of m.items; track item) {
+                  <li><i class="tech__dot" aria-hidden="true"></i>{{ item }}</li>
+                }
               </ul>
             </div>
-          </div>
+          }
+        </div>
+      </div>
+    </section>
 
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>{{getTranslation('itti_title')}}</h4>
-              <h5>{{getTranslation('itti_company')}}</h5>
-              <span class="period">2025 - 2026</span>
-              <p>{{getTranslation('itti_location')}}</p>
+    <section class="section ground-surface" id="sobre-mi" style="--hm: 2" aria-labelledby="sobre-mi-h">
+      <div class="wrap">
+        <div class="grid grid--top about">
+          <div class="span-6">
+            <div class="section-head"><h2 id="sobre-mi-h">{{ c.about.h2 }}</h2><p class="about__lead">{{ c.about.lead }}</p></div>
+            <div class="card about__card">
+            <ul class="ic-list about__facts">
+              @for (row of c.about.rows; track row.label; let i = $index) {
+                <li class="ic-row">
+                  <span class="ic-tile ic-tile--40 ic-tile--accent"><span class="ic ic-mask ic-20" [attr.style]="'--m:' + aboutIcon(i)"></span></span>
+                  <span class="ic-row__main"><span class="about__label">{{ row.label }}</span><span class="ic-row__title">{{ row.value }}</span></span>
+                </li>
+              }
+            </ul>
+            <p class="about__note"><span class="ic ic-mask ic-20" style="--m:url(assets/icons/ui-accessibility.svg)"></span>{{ c.about.note }}</p>
+            <p class="t-label muted list-label about__soft-label" id="blandas-l">{{ c.about.softTitle }}</p>
+            <ul class="tags" aria-labelledby="blandas-l">
+              @for (skill of c.about.soft; track skill) {
+                <li>{{ skill }}</li>
+              }
+            </ul>
+            </div>
+          </div>
+          <div class="span-6 start-7 about__side">
+            <div class="frame frame--photo frame--square about__portrait">
+              <img class="frame__img" src="/perfil.jpg" [alt]="c.about.portraitAlt" width="320" height="320" loading="lazy" data-source="client" data-subject="portrait">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="formacion" style="--hm: 2" aria-labelledby="formacion-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="formacion-h">{{ c.education.h2 }} <span class="muted">{{ c.education.muted }}</span></h2>
+        </div>
+        <div class="grid grid--top">
+          <div class="span-6 edu" role="group" aria-labelledby="titulos-l">
+            <p class="t-label muted list-label" id="titulos-l">{{ c.education.degreesTitle }}</p>
+            <ul class="rows">
+              @for (d of c.education.degrees; track d.title) {
+                <li><span class="rows__name">{{ d.title }}</span><p>{{ d.school }}</p><span class="rows__value"><span class="year">{{ d.year }}</span></span></li>
+              }
+            </ul>
+            <p class="t-label muted list-label list-label--next" id="certificaciones-l">{{ c.education.certsTitle }}</p>
+            <ul class="edu__certs" aria-labelledby="certificaciones-l">
+              @for (cert of c.education.certs; track cert) {
+                <li><span class="ic ic-mask ic-20" style="--m:url(assets/icons/ui-badge-check.svg)"></span>{{ cert }}</li>
+              }
+            </ul>
+          </div>
+          <div class="span-6 start-7" role="group" aria-labelledby="idiomas-l">
+            <p class="t-label muted list-label" id="idiomas-l">{{ c.about.languagesTitle }}</p>
+            <article class="card langs">
               <ul>
-                <li>{{getTranslation('itti_desc1')}}</li>
-                <li>{{getTranslation('itti_desc2')}}</li>
-                <li>{{getTranslation('itti_desc3')}}</li>
-                <li>{{getTranslation('itti_desc4')}}</li>
+                @for (l of c.about.languages; track l.label) {
+                  <li>
+                    <span class="langs__name">{{ l.label }}</span><span class="langs__level">{{ l.value }}</span>
+                    <span class="langs__bar" aria-hidden="true"><i [attr.style]="'--v:' + l.level + '%'"></i></span>
+                  </li>
+                }
               </ul>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>{{getTranslation('slingr_title')}}</h4>
-              <h5>{{getTranslation('slingr_company')}}</h5>
-              <span class="period">2022 - 2025</span>
-              <p>{{getTranslation('workingRemotely')}}</p>
-              <ul>
-                <li>{{getTranslation('slingr_desc1')}}</li>
-                <li>{{getTranslation('slingr_desc2')}}</li>
-                <li>{{getTranslation('slingr_desc3')}}</li>
-                <li>{{getTranslation('slingr_desc4')}}</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>{{getTranslation('softwaredelsur_title')}}</h4>
-              <h5>{{getTranslation('softwaredelsur_company')}}</h5>
-              <span class="period">2021 - 2022</span>
-              <p>{{getTranslation('softwaredelsur_location')}}</p>
-              <ul>
-                <li>{{getTranslation('softwaredelsur_desc1')}}</li>
-                <li>{{getTranslation('softwaredelsur_desc2')}}</li>
-                <li>{{getTranslation('softwaredelsur_desc3')}}</li>
-                <li>{{getTranslation('softwaredelsur_desc4')}}</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>{{getTranslation('metacod_title')}}</h4>
-              <h5>{{getTranslation('metacod_company')}}</h5>
-              <span class="period">2021 - 2022</span>
-              <p>{{getTranslation('metacod_location')}}</p>
-              <ul>
-                <li>{{getTranslation('metacod_desc1')}}</li>
-                <li>{{getTranslation('metacod_desc2')}}</li>
-                <li>{{getTranslation('metacod_desc3')}}</li>
-                <li>{{getTranslation('metacod_desc4')}}</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>{{getTranslation('freelance_title')}}</h4>
-              <h5>{{getTranslation('freelance_company')}}</h5>
-              <span class="period">2019 - 2021</span>
-              <p>{{getTranslation('freelance_location')}}</p>
-              <ul>
-                <li>{{getTranslation('freelance_desc1')}}</li>
-                <li>{{getTranslation('freelance_desc2')}}</li>
-                <li>{{getTranslation('freelance_desc3')}}</li>
-                <li>{{getTranslation('freelance_desc4')}}</li>
-              </ul>
-            </div>
+            </article>
           </div>
         </div>
-      </section>
-
-      <mat-divider class="section-divider"></mat-divider>
-
-      <section class="skills-section">
-        <div class="section-header">
-          <h3>{{getTranslation('technicalSkills')}}</h3>
-          <div class="expand-controls">
-            <button mat-button (click)="expandAll()">
-              <mat-icon>expand_more</mat-icon>
-              {{getTranslation('expandAll')}}
-            </button>
-            <button mat-button (click)="collapseAll()">
-              <mat-icon>expand_less</mat-icon>
-              {{getTranslation('collapseAll')}}
-            </button>
-          </div>
-        </div>
-
-        <div class="skills-grid">
-          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>code</mat-icon>
-                {{getTranslation('programmingLanguages')}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="skills-content">
-              <div class="skill-group">
-                <h5>{{getTranslation('backendFrameworks')}}</h5>
-                <mat-chip-set>
-                  <mat-chip class="skill-expert">Java 8+</mat-chip>
-                  <mat-chip class="skill-advanced">Spring Boot</mat-chip>
-                  <mat-chip class="skill-advanced">Hibernate</mat-chip>
-                  <mat-chip class="skill-professional">Node.js</mat-chip>
-                  <mat-chip class="skill-professional">Express.js</mat-chip>
-                  <mat-chip class="skill-intermediate">Python</mat-chip>
-                  <mat-chip class="skill-intermediate">Go</mat-chip>
-                  <mat-chip class="skill-intermediate">C/C++</mat-chip>
-                </mat-chip-set>
-              </div>
-              <div class="skill-group">
-                <h5>{{getTranslation('frontendFrameworks')}}</h5>
-                <mat-chip-set>
-                  <mat-chip class="skill-expert">Angular 8+</mat-chip>
-                  <mat-chip class="skill-advanced">TypeScript</mat-chip>
-                  <mat-chip class="skill-advanced">JavaScript</mat-chip>
-                  <mat-chip class="skill-professional">HTML5/CSS3</mat-chip>
-                  <mat-chip class="skill-intermediate">React</mat-chip>
-                  <mat-chip class="skill-intermediate">Vue.js</mat-chip>
-                  <mat-chip class="skill-basic">Flutter/Dart</mat-chip>
-                </mat-chip-set>
-              </div>
-            </div>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>storage</mat-icon>
-                {{getTranslation('databaseTech')}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="skills-content">
-              <div class="skill-group">
-                <h5>SQL {{getTranslation('databases')}}</h5>
-                <mat-chip-set>
-                  <mat-chip class="skill-expert">MySQL/MariaDB</mat-chip>
-                  <mat-chip class="skill-advanced">PostgreSQL</mat-chip>
-                  <mat-chip class="skill-professional">MS SQL Server</mat-chip>
-                  <mat-chip class="skill-professional">H2</mat-chip>
-                </mat-chip-set>
-              </div>
-              <div class="skill-group">
-                <h5>NoSQL {{getTranslation('databases')}}</h5>
-                <mat-chip-set>
-                  <mat-chip class="skill-professional">MongoDB</mat-chip>
-                  <mat-chip class="skill-intermediate">DynamoDB</mat-chip>
-                  <mat-chip class="skill-intermediate">CouchDB</mat-chip>
-                  <mat-chip class="skill-intermediate">Redis/Valkey</mat-chip>
-                </mat-chip-set>
-              </div>
-            </div>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>cloud</mat-icon>
-                {{getTranslation('cloudDevOps')}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="skills-content">
-              <div class="skill-group">
-                <h5>DevOps & Infrastructure</h5>
-                <mat-chip-set>
-                  <mat-chip class="skill-advanced">Docker</mat-chip>
-                  <mat-chip class="skill-professional">Kubernetes</mat-chip>
-                  <mat-chip class="skill-professional">AWS</mat-chip>
-                  <mat-chip class="skill-professional">GCP</mat-chip>
-                  <mat-chip class="skill-professional">Jenkins</mat-chip>
-                  <mat-chip class="skill-professional">GitHub Actions</mat-chip>
-                  <mat-chip class="skill-professional">Caddy</mat-chip>
-                  <mat-chip class="skill-professional">Cloudflare</mat-chip>
-                  <mat-chip class="skill-professional">Sentry</mat-chip>
-                  <mat-chip class="skill-intermediate">AWS Lambda / SQS / KMS</mat-chip>
-                  <mat-chip class="skill-intermediate">Kong</mat-chip>
-                </mat-chip-set>
-              </div>
-              <div class="skill-group">
-                <h5>{{getTranslation('testingTools')}}</h5>
-                <mat-chip-set>
-                  <mat-chip class="skill-professional">Selenium</mat-chip>
-                  <mat-chip class="skill-professional">CI/CD</mat-chip>
-                  <mat-chip class="skill-professional">Testcontainers</mat-chip>
-                  <mat-chip class="skill-professional">Playwright</mat-chip>
-                  <mat-chip class="skill-professional">Vitest</mat-chip>
-                  <mat-chip class="skill-intermediate">Unit Testing</mat-chip>
-                </mat-chip-set>
-              </div>
-            </div>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>architecture</mat-icon>
-                {{getTranslation('designPatternsTitle')}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="skills-content">
-              <div class="skill-group">
-                <mat-chip-set>
-                  <mat-chip class="skill-expert">REST Architecture</mat-chip>
-                  <mat-chip class="skill-expert">Microservices</mat-chip>
-                  <mat-chip class="skill-advanced">Hexagonal Architecture</mat-chip>
-                  <mat-chip class="skill-advanced">Modular Monolith</mat-chip>
-                  <mat-chip class="skill-advanced">Event-driven</mat-chip>
-                  <mat-chip class="skill-advanced">Multi-tenancy</mat-chip>
-                  <mat-chip class="skill-advanced">MVC Pattern</mat-chip>
-                  <mat-chip class="skill-advanced">DDD</mat-chip>
-                  <mat-chip class="skill-advanced">TDD</mat-chip>
-                  <mat-chip class="skill-professional">Client-Server</mat-chip>
-                  <mat-chip class="skill-professional">OOP</mat-chip>
-                  <mat-chip class="skill-intermediate">SOAP APIs</mat-chip>
-                </mat-chip-set>
-              </div>
-            </div>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>groups</mat-icon>
-                {{getTranslation('developmentMethodologies')}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="skills-content">
-              <div class="skill-group">
-                <mat-chip-set>
-                  <mat-chip class="skill-expert">Scrum</mat-chip>
-                  <mat-chip class="skill-advanced">Kanban</mat-chip>
-                  <mat-chip class="skill-professional">XP</mat-chip>
-                  <mat-chip class="skill-professional">Agile</mat-chip>
-                  <mat-chip class="skill-intermediate">Waterfall</mat-chip>
-                </mat-chip-set>
-              </div>
-            </div>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>smart_toy</mat-icon>
-                {{getTranslation('aiEngineering')}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="skills-content">
-              <div class="skill-group">
-                <mat-chip-set>
-                  <mat-chip class="skill-expert">Spec-Driven Development (DevFlow)</mat-chip>
-                  <mat-chip class="skill-advanced">Spec Kit</mat-chip>
-                  <mat-chip class="skill-advanced">OpenSpec</mat-chip>
-                  <mat-chip class="skill-expert">AI-generated E2E QA (QAFlow)</mat-chip>
-                  <mat-chip class="skill-advanced">Claude Code</mat-chip>
-                  <mat-chip class="skill-advanced">Multi-agent Review</mat-chip>
-                  <mat-chip class="skill-professional">OpenCode</mat-chip>
-                  <mat-chip class="skill-professional">LLM Integration (DeepSeek, Anthropic, Ollama)</mat-chip>
-                </mat-chip-set>
-              </div>
-            </div>
-          </mat-expansion-panel>
-        </div>
-      </section>
-
-      <mat-divider class="section-divider"></mat-divider>
-
-      <section class="education-section">
-        <div class="section-header">
-          <h3>{{getTranslation('academicFormation')}}</h3>
-        </div>
-        <div class="education-content">
-          <div class="education-item">
-            <div class="education-icon">
-              <mat-icon>school</mat-icon>
-            </div>
-            <div class="education-details">
-              <h4>{{getTranslation('degree1')}}</h4>
-              <h5>{{getTranslation('university1')}}</h5>
-              <span class="year">2022</span>
-              <p>{{getTranslation('degree1_desc')}}</p>
-            </div>
-          </div>
-          <div class="education-item">
-            <div class="education-icon">
-              <mat-icon>school</mat-icon>
-            </div>
-            <div class="education-details">
-              <h4>{{getTranslation('degree2')}}</h4>
-              <h5>{{getTranslation('university2')}}</h5>
-              <span class="year">2022</span>
-              <p>{{getTranslation('degree2_desc')}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="certifications-section">
-          <h4>{{getTranslation('certifications')}}</h4>
-          <div class="certifications-grid">
-            <div class="certification-item">
-              <mat-icon>verified</mat-icon>
-              <span>{{getTranslation('cert1')}}</span>
-            </div>
-            <div class="certification-item">
-              <mat-icon>verified</mat-icon>
-              <span>{{getTranslation('cert2')}}</span>
-            </div>
-            <div class="certification-item">
-              <mat-icon>verified</mat-icon>
-              <span>{{getTranslation('cert3')}}</span>
-            </div>
-            <div class="certification-item">
-              <mat-icon>verified</mat-icon>
-              <span>{{getTranslation('cert4')}}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <mat-divider class="section-divider"></mat-divider>
-
-      <section class="additional-info-section">
-        <div class="info-grid">
-          <div class="info-card">
-            <h4>{{getTranslation('languages')}}</h4>
-            <div class="language-skills">
-              <div class="language-item">
-                <span class="language-name">{{getTranslation('spanish')}}</span>
-                <span class="language-level native">{{getTranslation('native')}}</span>
-              </div>
-              <div class="language-item">
-                <span class="language-name">{{getTranslation('english')}}</span>
-                <span class="language-level advanced">{{getTranslation('advanced')}} (C1/C2)</span>
-              </div>
-              <div class="language-item">
-                <span class="language-name">{{getTranslation('german')}}</span>
-                <span class="language-level basic">{{getTranslation('basic')}} (A1)</span>
-              </div>
-              <div class="language-item">
-                <span class="language-name">{{getTranslation('italian')}}</span>
-                <span class="language-level basic">{{getTranslation('basic')}} (A1)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <h4>{{getTranslation('softSkills')}}</h4>
-            <mat-chip-set>
-              <mat-chip>{{getTranslation('softskill_proactivity')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_leadership')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_selflearning')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_teamwork')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_organization')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_adaptability')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_methodology')}}</mat-chip>
-              <mat-chip>{{getTranslation('softskill_problem_solving')}}</mat-chip>
-            </mat-chip-set>
-          </div>
-        </div>
-      </section>
-
-      <mat-divider class="section-divider"></mat-divider>
-
-      <section class="contact-section">
-        <div class="section-header">
-          <h3>{{getTranslation('contact')}}</h3>
-        </div>
-        <div class="contact-content">
-          <div class="contact-info">
-            <div class="contact-item">
-              <mat-icon>person</mat-icon>
-              <div>
-                <strong>{{getTranslation('fullName')}}:</strong>
-                <span>{{getTranslation('full_name_value')}}</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>cake</mat-icon>
-              <div>
-                <strong>{{getTranslation('birthDate')}}:</strong>
-                <span>{{getTranslation('birth_date_value')}}</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>location_on</mat-icon>
-              <div>
-                <strong>{{getTranslation('location')}}:</strong>
-                <span>{{getTranslation('location_value')}}</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>email</mat-icon>
-              <div>
-                <strong>{{getTranslation('email')}}:</strong>
-                <a href="mailto:pasaperez@yahoo.com.ar">pasaperez&#64;yahoo.com.ar</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>alternate_email</mat-icon>
-              <div>
-                <strong>{{getTranslation('alternativeEmail')}}:</strong>
-                <a href="mailto:angel.pasaperez@gmail.com">angel.pasaperez&#64;gmail.com</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>work</mat-icon>
-              <div>
-                <strong>{{getTranslation('linkedIn')}}:</strong>
-                <a href="https://www.linkedin.com/in/pasaperez/" target="_blank">linkedin.com/in/pasaperez</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>code</mat-icon>
-              <div>
-                <strong>{{getTranslation('github')}}:</strong>
-                <a href="https://github.com/pasaperez" target="_blank">github.com/pasaperez</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <mat-icon>work_outline</mat-icon>
-              <div>
-                <strong>Work GitHub:</strong>
-                <a href="https://github.com/pasaperez-work" target="_blank">github.com/pasaperez-work</a>
-              </div>
-            </div>
-          </div>
-          <div class="accessibility-notice">
-            <mat-icon>accessible</mat-icon>
-            <span>{{getTranslation('disability_note')}}</span>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styles: [`
-    /* Home Component Styles - Consistent with Header/Footer */
-
-    .portfolio-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      background: #f8f9fa;
-      min-height: 100vh;
-    }
-
-    /* Hero Section */
-    .hero-section {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 4rem 0;
-      margin: 0 -2rem 3rem -2rem;
-      border-radius: 0 0 2rem 2rem;
-      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
-    }
-
-    .hero-content {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .profile-image {
-      flex-shrink: 0;
-    }
-
-    .profile-image img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 6px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .profile-image img:hover {
-      transform: scale(1.05);
-    }
-
-    .hero-text h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      margin: 0 0 0.5rem 0;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-text h2 {
-      font-size: 1.3rem;
-      font-weight: 400;
-      margin: 0 0 1.5rem 0;
-      opacity: 0.9;
-    }
-
-    .hero-description {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-      opacity: 0.95;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      /* Eliminar position y z-index que pueden causar problemas */
-    }
-
-    .stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      border-radius: 1rem;
-      backdrop-filter: blur(10px);
-      min-width: 120px;
-      /* Eliminar position y z-index */
-      /* Asegurar que no haya transforms que causen movimiento */
-      transform: none !important;
-      will-change: auto !important;
-    }
-
-    .stat-label,
-    .stat-position,
-    .stat-company,
-    .stat-work {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-top: 0.25rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-      /* Eliminar z-index innecesario */
-    }
-
-    .cta-button {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
-      color: white !important;
-      border: none !important;
-      padding: 0.75rem 2rem !important;
-      font-size: 1rem !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
-    }
-
-    .contact-button {
-      background: transparent !important;
-      color: white !important;
-      border: 2px solid rgba(255, 255, 255, 0.3) !important;
-      padding: 0.75rem 2rem !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .contact-button:hover {
-      background: rgba(255, 255, 255, 0.1) !important;
-      border-color: rgba(255, 255, 255, 0.6) !important;
-    }
-
-    .cta-button,
-    .contact-button {
-      /* Remover position: relative y z-index */
-    }
-
-    /* Section Headers */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-header h3 {
-      font-size: 2.2rem;
-      font-weight: 600;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .section-divider {
-      margin: 3rem 0;
-      background: linear-gradient(90deg, transparent, #667eea, transparent);
-      height: 2px;
-      border: none;
-    }
-
-    /* About Section */
-    .about-section {
-      padding: 2rem 0;
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: #2c3e50 !important;
-      margin: 0;
-      font-weight: 400;
-    }
-
-    .key-strengths {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border-left: 4px solid #667eea;
-    }
-
-    .key-strengths h4 {
-      margin: 0 0 1rem 0;
-      color: #333;
-      font-weight: 600;
-    }
-
-    /* Key Strengths chips - Better contrast */
-    .key-strengths .mat-mdc-chip {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-      color: white !important;
-      font-weight: 500 !important;
-      border: none !important;
-    }
-
-    .key-strengths .mat-mdc-chip:hover {
-      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
-    }
-
-    /* Experience Timeline */
-    .experience-section {
-      padding: 2rem 0;
-    }
-
-    .experience-timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .experience-timeline::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-      border-radius: 2px;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 3rem;
-      padding-left: 2rem;
-    }
-
-    .timeline-marker {
-      position: absolute;
-      left: -2rem;
-      top: 0.5rem;
-      width: 16px;
-      height: 16px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    }
-
-    .timeline-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .timeline-content:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .timeline-content h4 {
-      color: #333;
-      font-weight: 600;
-      margin: 0 0 0.5rem 0;
-      font-size: 1.3rem;
-    }
-
-    .timeline-content h5 {
-      color: #667eea;
-      font-weight: 500;
-      margin: 0 0 0.5rem 0;
-      font-size: 1.1rem;
-    }
-
-    .timeline-content h5 a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .timeline-content h5 a:hover {
-      text-decoration: underline;
-    }
-
-    .timeline-content .period {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      color: white;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: inline-block;
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-content ul {
-      margin: 1rem 0 0 0;
-      padding-left: 1.5rem;
-    }
-
-    .timeline-content li {
-      margin-bottom: 0.5rem;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    /* Skills Section */
-    .skills-section {
-      padding: 2rem 0;
-    }
-
-    .expand-controls {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .expand-controls button {
-      color: #667eea !important;
-    }
-
-    .skills-grid {
-      display: grid;
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background: white !important;
-      border-radius: 1rem !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
-      overflow: hidden !important;
-    }
-
-    .skill-category .mat-expansion-panel-header {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-      border-bottom: 2px solid #667eea !important;
-      padding: 1.5rem !important;
-    }
-
-    /* Selectores más específicos para los títulos */
-    .skill-category .mat-expansion-panel-header .mat-panel-title,
-    .skill-category .mat-panel-title,
-    .skill-category .mat-expansion-panel-header-title,
-    .skill-category .mat-expansion-panel-header .mat-expansion-panel-header-title {
-      display: flex !important;
-      align-items: center !important;
-      gap: 1rem !important;
-      font-weight: 700 !important;
-      color: #1a1a1a !important;
-      font-size: 1.2rem !important;
-    }
-
-    /* Forzar color en todos los elementos de texto dentro del header */
-    .skill-category .mat-expansion-panel-header * {
-      color: #1a1a1a !important;
-    }
-
-    .skill-category .mat-expansion-panel-header mat-icon {
-      color: #667eea !important;
-      font-size: 1.3rem !important;
-    }
-
-    /* Asegurar que el texto del título sea visible */
-    .skill-category .mat-expansion-panel-header-title .mat-panel-title {
-      color: #1a1a1a !important;
-      font-weight: 700 !important;
-    }
-
-    .skills-content {
-      padding: 2rem;
-    }
-
-    .skill-group {
-      margin-bottom: 2rem;
-    }
-
-    .skill-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .skill-group h5 {
-      color: #2c3e50 !important;
-      font-weight: 600;
-      margin: 0 0 1rem 0;
-      font-size: 1.1rem;
-    }
-
-    /* Skill Level Colors */
-    .skill-expert {
-      background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
-      color: white !important;
-    }
-
-    .skill-advanced {
-      background: linear-gradient(135deg, #007bff 0%, #6610f2 100%) !important;
-      color: white !important;
-    }
-
-    .skill-professional {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-      color: white !important;
-    }
-
-    .skill-intermediate {
-      background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%) !important;
-      color: white !important;
-    }
-
-    .skill-basic {
-      background: linear-gradient(135deg, #6c757d 0%, #495057 100%) !important;
-      color: white !important;
-    }
-
-    /* Education Section */
-    .education-section {
-      padding: 2rem 0;
-    }
-
-    .education-content {
-      margin-bottom: 3rem;
-    }
-
-    .education-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 2rem;
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      margin-bottom: 2rem;
-      transition: transform 0.3s ease;
-    }
-
-    .education-item:hover {
-      transform: translateY(-2px);
-    }
-
-    .education-icon {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 1rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .education-details h4 {
-      color: #333;
-      font-weight: 600;
-      margin: 0 0 0.5rem 0;
-      font-size: 1.3rem;
-    }
-
-    .education-details h5 {
-      color: #667eea;
-      font-weight: 500;
-      margin: 0 0 0.5rem 0;
-      font-size: 1rem;
-    }
-
-    .education-details .year {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      color: white;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: inline-block;
-      margin-bottom: 0.5rem;
-    }
-
-    .certifications-section h4 {
-      color: #333;
-      font-weight: 600;
-      margin: 0 0 1.5rem 0;
-      font-size: 1.5rem;
-    }
-
-    .certifications-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    .certification-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      border-left: 4px solid #28a745;
-      transition: transform 0.3s ease;
-    }
-
-    .certification-item:hover {
-      transform: translateX(4px);
-    }
-
-    .certification-item mat-icon {
-      color: #28a745;
-    }
-
-    /* Additional Info Section */
-    .additional-info-section {
-      padding: 2rem 0;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-    }
-
-    .info-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border-top: 4px solid #667eea;
-    }
-
-    .info-card h4 {
-      color: #333;
-      font-weight: 600;
-      margin: 0 0 1.5rem 0;
-      font-size: 1.3rem;
-    }
-
-    .language-skills {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .language-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .language-item:last-child {
-      border-bottom: none;
-    }
-
-    .language-name {
-      font-weight: 500;
-      color: #333;
-    }
-
-    .language-level {
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .language-level.native {
-      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-      color: white;
-    }
-
-    .language-level.advanced,
-    .language-level.intermediate {
-      background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
-      color: white;
-    }
-
-    .language-level.basic {
-      background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
-      color: white;
-    }
-
-    /* Soft Skills chips - Better contrast */
-    .additional-info-section .mat-mdc-chip {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-      color: white !important;
-      font-weight: 500 !important;
-      border: none !important;
-      font-size: 0.9rem !important;
-    }
-
-    .additional-info-section .mat-mdc-chip:hover {
-      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
-    }
-
-    /* Contact Section */
-    .contact-section {
-      padding: 2rem 0;
-    }
-
-    .contact-content {
-      background: white;
-      padding: 3rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem;
-      background: #f8f9fa;
-      border-radius: 0.75rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-item:hover {
-      background: #e9ecef;
-    }
-
-    .contact-item mat-icon {
-      color: #667eea;
-      background: rgba(102, 126, 234, 0.1);
-      border-radius: 50%;
-    }
-
-    .contact-item div {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .contact-item strong {
-      color: #333;
-      font-size: 0.9rem;
-    }
-
-    .contact-item span,
-    .contact-item a {
-      color: #666;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-
-    .contact-item a:hover {
-      color: #667eea;
-    }
-
-    .accessibility-notice {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-      padding: 1.5rem;
-      border-radius: 0.75rem;
-      border-left: 4px solid #2196f3;
-    }
-
-    .accessibility-notice mat-icon {
-      color: #2196f3;
-    }
-
-    .accessibility-notice span {
-      color: #333;
-      font-weight: 500;
-    }
-
-    /* Portfolio Footer */
-    .portfolio-footer {
-      text-align: center;
-      padding: 2rem 0;
-      margin-top: 3rem;
-      border-top: 1px solid #eee;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .portfolio-container {
-        padding: 0 1rem;
-      }
-
-      .hero-section {
-        margin: 0 -1rem 2rem -1rem;
-        padding: 3rem 0;
-      }
-
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-        padding: 0 1rem;
-      }
-
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero-stats {
-        justify-content: center;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .section-header h3 {
-        font-size: 1.8rem;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-info {
-        grid-template-columns: 1fr;
-      }
-
-      .certifications-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .education-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-      }
-
-      .timeline-item {
-        padding-left: 1.5rem;
-      }
-
-      .timeline-marker {
-        left: -1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-text h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero-stats {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .stat {
-        min-width: 200px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .cta-button,
-      .contact-button {
-        width: 100% !important;
-      }
-    }
-
-    /* Material Design Enhancements */
-    .mat-mdc-chip {
-      margin: 0.25rem !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .mat-mdc-chip:hover {
-      transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-    }
-
-    .mat-expansion-panel {
-      transition: all 0.3s ease !important;
-    }
-
-    .mat-expansion-panel:hover {
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    }
-  `]
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class HomeComponent {
   private languageService: LanguageService = inject(LanguageService);
-  protected allExpanded: boolean = false;
-
-  public expandAll(): void {
-    this.allExpanded = true;
+  protected get c(): PageContent {
+    return this.languageService.content();
   }
 
-  public collapseAll(): void {
-    this.allExpanded = false;
+  protected tools(ids: ToolId[]): Tool[] {
+    return ids.map(id => TOOLS[id]);
   }
 
-  protected get cvFile(): string {
-    return this.languageService.getCurrentLanguage() === 'es' ? '/Angel_Perez_CV_2026_ES.pdf' : '/Angel_Perez_CV_2026.pdf';
+  protected vbDiagram(): string {
+    return JSON.stringify({layout: 'hub', alt: this.c.projects.diagrams.vb, motion: {cycle: 4}, center: {label: 'Spring Boot 4', icon: 'spring'},
+      spokes: [{label: 'PostgreSQL', icon: 'postgres'}, {label: 'React', icon: 'react'}, {label: 'Docker', icon: 'docker'},
+        {label: 'Caddy', icon: 'caddy'}, {label: 'Cloudflare', icon: 'cloudflare'}, {label: 'DeepSeek', icon: 'deepseek'}]});
   }
 
-  protected get cvDownloadName(): string {
-    return this.languageService.getCurrentLanguage() === 'es' ? 'Angel_Perez_CV_ES.pdf' : 'Angel_Perez_CV_EN.pdf';
+  protected wepaDiagram(): string {
+    const es = this.languageService.getCurrentLanguage() === 'es';
+    return JSON.stringify({layout: 'lanes', alt: this.c.projects.diagrams.wepa, curve: 'curve',
+      input: {label: es ? 'Caja' : 'Cash', icon: 'java', sub: 'API'},
+      core: {label: 'Amazon SQS', icon: 'aws-sqs'},
+      lanes: [{label: 'Lambda', icon: 'aws-lambda', done: true, sub: es ? 'Pagos' : 'Payments'},
+        {label: es ? 'Cobros' : 'Billers', icon: 'ui:receipt', done: true, sub: 'Timeouts'},
+        {label: 'KMS', icon: 'aws-kms', done: true, sub: 'AuthGuard'}]});
   }
 
-  public getTranslation(key: keyof PersonalData): string {
-    return this.languageService.getTranslation(key);
+  protected pipeIcon(i: number): string {
+    return ['assets/icons/spring.svg', 'assets/icons/playwright.svg', 'assets/icons/postgres.svg', 'assets/icons/docker.svg', 'assets/icons/cloudflare.svg'][i];
+  }
+
+  protected toolCount(): number {
+    return new Set(this.c.stack.groups.flatMap(g => g.tools)).size;
+  }
+
+  // what a tech card names under its four tiles: the group's other tools, then its own note
+  protected rest(group: SkillGroup): string {
+    return [...this.tools(group.tools.slice(4)).map(t => t.name), ...(group.also ? [group.also] : [])].join(', ');
+  }
+
+  protected aboutIcon(i: number): string {
+    return `url(assets/icons/ui-${['user-round', 'calendar', 'map-pin'][i]}.svg)`;
   }
 }

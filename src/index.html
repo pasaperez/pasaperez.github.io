@@ -1,18 +1,69 @@
 <!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <title>Angel Santiago Perez</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-  </head>
-  <body class="mat-typography hide-scroll">
-    <app-root-pasaperez></app-root-pasaperez>
-  </body>
+<html lang="es" data-type="software" data-radius="soft" data-ground="sky" data-buttons="arrow" data-motion>
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Angel Santiago Perez: ingeniero en sistemas full stack en Mendoza</title>
+  <meta name="description" content="Ingeniero en Sistemas con más de 7 años en Java, Spring Boot y microservicios. Cofundador de Visto Bueno; antes, pagos para la red Wepa en itti.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Angel Santiago Perez: ingeniero en sistemas full stack en Mendoza">
+  <meta property="og:description" content="Ingeniero en Sistemas con más de 7 años en Java, Spring Boot y microservicios.">
+  <meta property="og:image" content="https://pasaperez.github.io/share.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#4c63e6">
+  <link rel="canonical" href="https://pasaperez.github.io/">
+  <meta name="site-kind" content="software">
+  <meta name="page-type" content="software">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" data-beasties-skip href="assets/system.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/ui/cards.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/motion/motion.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/layout/layout.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/icons/icon.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/ui/base.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/ui/pipeline-board/fragment.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/ui/notify/fragment.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/ui/checklist/fragment.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/ui/terminal-run/fragment.css">
+  <link rel="stylesheet" data-beasties-skip href="assets/diagrams/diagram.css">
+  <style>
+  :root {
+    --p-bg: #ffffff; --p-surface: #f1f3fe; --p-ink: #1b1f3b; --p-muted: #686d81;
+    --p-accent: #4c63e6; --p-accent-ink: #ffffff; --p-action: #4c63e6; --p-action-ink: #ffffff;
+    --p-accent-2: #1fb5a8; --p-accent-2-text: #138a80;
+    --p-inv-bg: #1b1f3b; --p-inv-surface: #282c47; --p-inv-ink: #ffffff; --p-inv-muted: #9fa2b0;
+    --p-inv-accent: #ffffff; --p-inv-accent-ink: #1b1f3b; --p-inv-action: #ffffff; --p-inv-action-ink: #1b1f3b;
+    --font-display: "Host Grotesk", system-ui, sans-serif;
+    --font-text: "Host Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --display-weight: 500;
+    --display-tracking: -0.035em;
+    --display-tracking-xl: -0.04em;
+  }
+  </style>
+  <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+  <script src="assets/backgrounds/backgrounds.js"></script>
+  <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+  <link rel="modulepreload" href="assets/moments/moments.js">
+  <link rel="modulepreload" href="assets/moments/lib.js">
+  <link rel="modulepreload" href="assets/moments/iris-opens/moment.js">
+  <link rel="modulepreload" href="assets/moments/letters-assemble/moment.js">
+</head>
+<body>
+<!-- type: software (site-kind software: un ingeniero que presenta los sistemas que construyó; acción principal: Descargar CV)
+     deal: hero collage (pipeline-board del deploy de Visto Bueno sobre grain-gradient, la tarjeta pequeña con el retrato), nav nav-centre (nav-cards repartido de nuevo:
+     no hay fotos para sus tarjetas), close close-type (con la primera página del CV como imagen), footer footer-statement,
+     rhythm surface-pairs (#tecnologias y #sobre-mi en la banda celeste; dark-band repartido de nuevo: el cliente no quiere fondos negros),
+     buttons arrow, mark arc, palette brand (start.mjs brand con el azul del sitio original del cliente: tinta azul marino, acción azul, superficie celeste),
+     type host, radius soft, ground sky, effect grain-gradient (héroe), card grounds ninguno (pick: nada encaja en la familia grain)
+     moments: letters-assemble en #enfoque (la especialidad se arma letra a letra), iris-opens en #tecnologias (el fondo cambia
+     a través de un disco); beats: héroe, #enfoque, #tecnologias, con secciones tranquilas entre ellos -->
+  <app-root-pasaperez></app-root-pasaperez>
+</body>
 </html>

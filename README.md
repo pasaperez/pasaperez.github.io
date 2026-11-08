@@ -10,30 +10,28 @@ Este proyecto es un sitio web portfolio moderno y responsivo construido con Angu
 
 - **Diseño Moderno y Responsivo**: Interfaz adaptativa que funciona perfectamente en dispositivos móviles, tablets y escritorio
 - **Multiidioma**: Sistema de traducción integrado para soportar múltiples idiomas
-- **Secciones Interactivas**:
-  - Hero section con información de perfil y estadísticas destacadas
-  - Timeline de experiencia profesional
-  - Skills organizadas por categorías con niveles de expertise
-  - Formación académica y certificaciones
-  - Información de contacto y enlaces a redes profesionales
-- **Material Design**: Utiliza Angular Material para componentes UI consistentes y modernos
+- **Secciones**, una o dos pantallas cada una:
+  - Hero con el nombre, la especialidad, la descarga del CV, la foto y el deploy de Visto Bueno animado
+  - Proyectos (Visto Bueno, Wepa, DevFlow y QAFlow) con diagramas, una checklist y una terminal animados
+  - Especialidad en letras que se arman al hacer scroll, con tres cifras, y experiencia con los años en insignias
+  - Tecnologías por grupo (las cuatro más usadas con su logo y el resto nombradas), sobre mí con el retrato, formación con las barras de nivel de cada idioma
+  - Cierre con la descarga del CV junto a su primera página (`public/cv-es.jpg` y `public/cv-en.jpg`, sin la línea de contacto) y pie con emails y perfiles
+- **Sistema de diseño de taste-skill**: tokens, grilla, botones, movimiento y momentos copiados en `public/assets` (no se editan a mano, salvo `moments/iris-opens/moment.js`, que suma las opciones `start`, `end` y `ease`; si se vuelve a copiar el kit, hay que reaplicarlas)
 - **Optimizado para GitHub Pages**: Configuración lista para despliegue automático
 - **CV Descargable**: Opción de descarga del CV en formato PDF
 
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
-- **Angular 22.2**: Framework principal (zoneless)
+- **Angular 22.2**: Framework principal (zoneless), pre-renderizado en el build con `@angular/ssr`
 - **TypeScript 6.0**: Lenguaje de programación
-- **Angular Material 22.2**: Biblioteca de componentes UI
-- **Angular CDK 22.2**: Component Dev Kit
 - **RxJS 7.8.0**: Programación reactiva
 
 ### Estilos
-- **CSS3**: Estilos personalizados
-- **Material Design**: Sistema de diseño
-- **Bootstrap 5.3.7**: Framework CSS para componentes adicionales
-- **Google Fonts**: Tipografía Roboto
+- **Kit de taste-skill** (`public/assets`): `system.css`, `layout.css`, `motion.css`, `icon.css` y sus scripts, que cargan desde `src/main.ts` cuando Angular terminó de renderizar
+- **CSS propio**: `src/styles.css`, solo lo que el kit no trae
+- **Google Fonts**: Host Grotesk y JetBrains Mono
+- **Íconos**: logos reales de cada herramienta en `public/assets/icons` (marcas de sus dueños)
 
 ### Herramientas de Desarrollo
 - **Angular CLI 22.2**: Herramienta de línea de comandos
@@ -79,7 +77,7 @@ El proyecto viene preconfigurado, pero puedes personalizar:
 
 - **Contenido**: Edita los archivos en `src/app/core/services/language.service.ts` para actualizar traducciones
 - **Estilos**: Modifica `src/styles.css` para cambios globales
-- **Tema de Material**: Configurado en `angular.json` (actualmente usa `magenta-violet.css`)
+- **Colores y tipografía**: el bloque `:root` de `src/index.html` (fondo blanco, texto azul marino, acento azul y una banda celeste en Tecnologías y Sobre mí)
 
 ## 💻 Comandos de Desarrollo
 
@@ -135,7 +133,6 @@ pasaperez.github.io/
 │   │   │   └── home/          # Componente página principal
 │   │   ├── shared/            # Módulo compartido (header, footer)
 │   │   ├── app-pasaperez.component.ts  # Componente raíz
-│   │   ├── app-routing.module.ts       # Configuración de rutas
 │   │   └── app.config.ts      # Configuración de la aplicación
 │   ├── index.html             # HTML principal
 │   ├── main.ts                # Punto de entrada
@@ -144,7 +141,10 @@ pasaperez.github.io/
 │   ├── perfil.jpg             # Imagen de perfil
 │   ├── Angel_Perez_CV_2026.pdf     # CV en inglés (compilado desde main.tex)
 │   ├── Angel_Perez_CV_2026_ES.pdf  # CV en español (compilado desde main.es.tex)
-│   └── favicon.ico            # Icono del sitio
+│   ├── assets/                # Kit de taste-skill e íconos
+│   ├── share.jpg              # Imagen para compartir (og:image)
+│   ├── favicon.svg            # Icono del sitio
+│   └── favicon.ico            # Icono alternativo
 ├── angular.json               # Configuración de Angular
 ├── package.json               # Dependencias del proyecto
 ├── tsconfig.json              # Configuración de TypeScript
@@ -193,39 +193,33 @@ toda la rama y, sin ese archivo, el dominio se pierde.
 
 ## 🎨 Personalización
 
-### Cambiar Colores y Tema
+### Cambiar Colores y Tipografía
 
-Los colores principales se definen mediante gradientes CSS en los componentes. Para cambiar el tema:
+Los colores y las fuentes son las variables `--p-*` y `--font-*` del bloque `:root` en `src/index.html`.
+El resto del sistema (espaciado, grilla, botones) sale de `public/assets/system.css`.
 
-1. **Tema de Material Design**: Edita `angular.json` línea 50:
-   ```json
-   "@angular/material/prebuilt-themes/magenta-violet.css"
-   ```
-   Opciones disponibles: `indigo-pink.css`, `deeppurple-amber.css`, `pink-bluegrey.css`, `purple-green.css`
+### Cambiar el Contenido
 
-2. **Gradientes Personalizados**: En `home.component.ts`, busca y modifica:
-   ```css
-   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-   ```
-
-### Agregar Nuevas Secciones
-
-1. Crea un nuevo componente:
-   ```bash
-   ng generate component pages/nueva-seccion
-   ```
-
-2. Añade la ruta en `app-routing.module.ts`
-
-3. Actualiza el menú en el componente header
+Todo el texto, en español e inglés, está en `src/app/core/services/language.service.ts`; las herramientas
+y sus íconos, en `src/app/pages/home/tools.ts`.
 
 ## 🌐 Multiidioma
 
-El proyecto incluye un servicio de idiomas (`LanguageService`) que permite agregar soporte para múltiples idiomas:
+La página está en español en `/` y en inglés en `/en/`; el idioma sale de la ruta. El enlace **English / Español**
+de la barra lleva de una a otra, y los enlaces viejos con `?lang=en` o `?lang=es` redirigen a la página de su idioma
+(`src/main.ts`). Los textos de los dos idiomas están en `src/app/core/services/language.service.ts`.
 
-1. Edita `src/app/core/services/language.service.ts`
-2. Agrega nuevos idiomas al objeto de traducciones
-3. Implementa un selector de idioma en el header
+## 🔎 SEO
+
+- **Pre-render**: el build (`outputMode: "static"` con `@angular/ssr`) genera `dist/browser/index.html` y
+  `dist/browser/en/index.html` con todo el contenido ya escrito, así buscadores y vistas previas de enlaces lo leen sin
+  ejecutar JavaScript. Las rutas están en `src/app/app.routes.ts` y `src/app/app.routes.server.ts`; GitHub Pages sigue
+  sirviendo archivos estáticos.
+- **Cabecera por idioma**: `src/app/core/services/page-head.service.ts` arma título, descripción, canonical, el par
+  `hreflang` (`es`, `en` y `x-default`), Open Graph, Twitter y el JSON-LD (`ProfilePage` con la `Person`), todo a partir
+  del contenido de cada idioma.
+- **Rastreo**: `public/robots.txt` y `public/sitemap.xml` (con los dos idiomas enlazados). Hay que actualizar `lastmod`
+  del sitemap cuando cambia el contenido.
 
 ## 📊 Optimización y Performance
 
@@ -284,7 +278,6 @@ Este proyecto es personal y está destinado a fines de portfolio. © 2025 Angel 
 ## 🙏 Agradecimientos
 
 - Angular Team por el excelente framework
-- Material Design por los componentes UI
 - GitHub Pages por el hosting gratuito
 - La comunidad de desarrollo por las herramientas y recursos
 
