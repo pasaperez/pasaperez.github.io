@@ -19,14 +19,14 @@
   <a href="https://pasaperez.github.io/">🌐 Portfolio</a> | 
   <a href="https://www.linkedin.com/in/pasaperez/">LinkedIn</a> | 
   <a href="https://github.com/pasaperez">GitHub</a> | 
-  <a href="https://github.com/pasaperez-work">SLINGR Projects</a>
+  <a href="https://github.com/pasaperez-work">Work Projects</a>
 </p>
 
 ---
 
 ## 📄 Summary
 
-- **Co-founder & Staff Software Engineer at <a href="https://vistobueno.tech">Visto Bueno</a>** (2026): rental-operations SaaS taken to production. Multi-tenant Spring Boot 4 modular monolith, four React 19 apps, AI document reading and one-command VPS deploys with automatic rollback.
+- **Co-founder & Staff Software Engineer at <a href="https://vistobueno.tech">Visto Bueno</a>** (2026): rental-operations SaaS taken to production. Multi-tenant Spring Boot 4 modular monolith, React 19 apps, AI document reading and one-command VPS deploys with automatic rollback.
 - **Senior Software Engineer at itti** (2025–2026): core payment services for Wepa, a nationwide payments and collections network processing millions of transactions per day (Java, Node.js, Python, Go, AWS).
 - **Backend Technical Expert at Slingr** (2022–2025): Java 8 → 24 migration for 5,000+ users, HIPAA and SOC 2 certifications, CI/CD builds 83% faster.
 - **DevFlow & QAFlow** (private for now):
@@ -150,7 +150,7 @@
 - 🌐 <a href="https://pasaperez.github.io/">Portfolio</a>
 - 🔗 <a href="https://www.linkedin.com/in/pasaperez/">LinkedIn</a>
 - 💻 <a href="https://github.com/pasaperez">Main GitHub</a>
-- 🛠️ <a href="https://github.com/pasaperez-work">SLINGR Projects</a>
+- 🛠️ <a href="https://github.com/pasaperez-work">Work Projects</a>
 
 ---
 
@@ -173,14 +173,14 @@
   <a href="https://pasaperez.github.io/">🌐 Portafolio</a> | 
   <a href="https://www.linkedin.com/in/pasaperez/">LinkedIn</a> | 
   <a href="https://github.com/pasaperez">GitHub</a> | 
-  <a href="https://github.com/pasaperez-work">Proyectos SLINGR</a>
+  <a href="https://github.com/pasaperez-work">Proyectos Laborales</a>
 </p>
 
 ---
 
 ## 📄 Resumen
 
-- **Cofundador y Staff Software Engineer en <a href="https://vistobueno.tech">Visto Bueno</a>** (2026): SaaS de operaciones de alquiler llevado a producción. Monolito modular multi-tenant en Spring Boot 4, cuatro apps React 19, lectura de documentos con IA y deploys a VPS en un comando con rollback automático.
+- **Cofundador y Staff Software Engineer en <a href="https://vistobueno.tech">Visto Bueno</a>** (2026): SaaS de operaciones de alquiler llevado a producción. Monolito modular multi-tenant en Spring Boot 4, apps React 19, lectura de documentos con IA y deploys a VPS en un comando con rollback automático.
 - **Senior Software Engineer en itti** (2025–2026): servicios core de pagos de Wepa, red nacional de pagos y cobranzas que procesa millones de transacciones por día (Java, Node.js, Python, Go, AWS).
 - **Backend Technical Expert en Slingr** (2022–2025): migración de Java 8 a 24 para más de 5.000 usuarios, certificaciones HIPAA y SOC 2, builds de CI/CD un 83% más rápidos.
 - **DevFlow y QAFlow** (privados por ahora):
@@ -304,7 +304,7 @@
 - 🌐 <a href="https://pasaperez.github.io/">Portafolio</a>
 - 🔗 <a href="https://www.linkedin.com/in/pasaperez/">LinkedIn</a>
 - 💻 <a href="https://github.com/pasaperez">GitHub principal</a>
-- 🛠️ <a href="https://github.com/pasaperez-work">Proyectos SLINGR</a>
+- 🛠️ <a href="https://github.com/pasaperez-work">Proyectos Laborales</a>
 
 ---
 
