@@ -4,7 +4,7 @@ Portfolio personal y CV interactivo de Angel Santiago Perez, desplegado en GitHu
 
 ## 📋 Descripción
 
-Este proyecto es un sitio web portfolio moderno y responsivo construido con Angular 20, que presenta mi experiencia profesional, habilidades técnicas, formación académica y proyectos. El sitio está diseñado para proporcionar una experiencia visual atractiva y accesible para reclutadores, compañeros profesionales y cualquier persona interesada en conocer mi trayectoria como desarrollador Full-Stack.
+Este proyecto es un sitio web portfolio moderno y responsivo construido con Angular 22, que presenta mi experiencia profesional, habilidades técnicas, formación académica y proyectos. El sitio está diseñado para proporcionar una experiencia visual atractiva y accesible para reclutadores, compañeros profesionales y cualquier persona interesada en conocer mi trayectoria como desarrollador Full-Stack.
 
 ## ✨ Características Principales
 
@@ -23,10 +23,10 @@ Este proyecto es un sitio web portfolio moderno y responsivo construido con Angu
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
-- **Angular 20.1.0**: Framework principal
-- **TypeScript 5.8.2**: Lenguaje de programación
-- **Angular Material 20.1.0**: Biblioteca de componentes UI
-- **Angular CDK 20.1.0**: Component Dev Kit
+- **Angular 22.2**: Framework principal (zoneless)
+- **TypeScript 6.0**: Lenguaje de programación
+- **Angular Material 22.2**: Biblioteca de componentes UI
+- **Angular CDK 22.2**: Component Dev Kit
 - **RxJS 7.8.0**: Programación reactiva
 
 ### Estilos
@@ -36,21 +36,21 @@ Este proyecto es un sitio web portfolio moderno y responsivo construido con Angu
 - **Google Fonts**: Tipografía Roboto
 
 ### Herramientas de Desarrollo
-- **Angular CLI 20.1.0**: Herramienta de línea de comandos
-- **Jasmine 5.8.0**: Framework de testing
+- **Angular CLI 22.2**: Herramienta de línea de comandos
+- **Jasmine 6.2**: Framework de testing
 - **Karma 6.4.0**: Test runner
-- **angular-cli-ghpages 2.0.3**: Utilidad de despliegue
+- **angular-cli-ghpages 3.0**: Utilidad de despliegue
 
 ## 📋 Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado:
 
-- **Node.js**: versión 18.x o superior
+- **Node.js**: 22.22+ o 24.15+ (lo exige Angular 22)
 - **npm**: versión 9.x o superior (incluido con Node.js)
 - **Git**: para clonar el repositorio
 
 Opcionalmente:
-- **Bun**: Gestor de paquetes alternativo (el proyecto incluye `bun.lock`)
+- **Bun**: Gestor de paquetes alternativo (no se versiona ningún lockfile)
 
 ## 🚀 Instalación y Configuración
 
@@ -142,7 +142,7 @@ pasaperez.github.io/
 │   └── styles.css             # Estilos globales
 ├── public/
 │   ├── perfil.jpg             # Imagen de perfil
-│   ├── Angel_Perez_CV_2025.pdf  # CV descargable
+│   ├── Angel_Perez_CV_2026.pdf  # CV descargable (compilado desde main.tex)
 │   └── favicon.ico            # Icono del sitio
 ├── angular.json               # Configuración de Angular
 ├── package.json               # Dependencias del proyecto
@@ -152,9 +152,22 @@ pasaperez.github.io/
 
 ## 🚀 Despliegue a GitHub Pages
 
-### Despliegue Automático
+GitHub Pages sirve la rama `gh-pages`, no `main`: un push a `main` por sí solo no publica nada.
+Hay dos formas de publicar y las dos escriben esa rama con `angular-cli-ghpages`, así que dan
+el mismo resultado y se pueden alternar.
 
-El proyecto está configurado con `angular-cli-ghpages` para facilitar el despliegue:
+### Despliegue Automático (GitHub Actions)
+
+`.github/workflows/deploy-gh-pages.yml` compila y publica en cada push a `main`, salvo cuando
+solo cambian archivos que no llegan al sitio (`*.md`, `LICENSE`, la configuración de Qodana o
+de Dependabot). También se puede lanzar a mano desde la pestaña **Actions** → **Deploy GitHub
+Pages** → **Run workflow**. Instala con Bun, compila con Node 24 y publica con el
+`GITHUB_TOKEN` del workflow; el commit en `gh-pages` dice `Deploy <sha>`.
+
+### Despliegue Manual
+
+Si GitHub Actions no está disponible (por ejemplo, sin minutos), se publica desde la máquina
+local:
 
 ```bash
 npm run deploy
@@ -162,9 +175,10 @@ npm run deploy
 
 Este comando:
 1. Compila el proyecto en modo producción
-2. Optimiza los archivos
-3. Despliega automáticamente a la rama `gh-pages`
-4. El sitio estará disponible en: `https://pasaperez.github.io`
+2. Reemplaza el contenido de la rama `gh-pages` con un commit automático, usando el usuario de git local
+3. El sitio estará disponible en: `https://pasaperez.github.io`
+
+`npm run deploy -- --dry-run` compila y muestra qué publicaría, sin pushear.
 
 ### Configuración de GitHub Pages
 
@@ -172,6 +186,9 @@ Este comando:
 2. Navega a "Pages" en el menú lateral
 3. Asegúrate de que la fuente esté configurada en la rama `gh-pages`
 4. El sitio se actualizará automáticamente con cada despliegue
+
+Para usar un dominio propio, agregá `public/CNAME` con el dominio: cada despliegue reemplaza
+toda la rama y, sin ese archivo, el dominio se pierde.
 
 ## 🎨 Personalización
 
@@ -214,7 +231,7 @@ El proyecto incluye un servicio de idiomas (`LanguageService`) que permite agreg
 El proyecto incluye configuraciones de optimización:
 
 - **Bundle Budgets**: Límites de tamaño configurados en `angular.json`
-  - Initial bundle: máximo 1MB
+  - Initial bundle: aviso desde 600kB, máximo 1MB
   - Component styles: máximo 20kB
 - **Output Hashing**: Habilitado en producción para cache busting
 - **Lazy Loading**: Preparado para módulos con carga diferida
@@ -274,4 +291,4 @@ Este proyecto es personal y está destinado a fines de portfolio. © 2025 Angel 
 
 ⭐ Si te gusta este proyecto o te resulta útil, ¡considera darle una estrella!
 
-**Última actualización**: Enero 2025
+**Última actualización**: Noviembre 2026

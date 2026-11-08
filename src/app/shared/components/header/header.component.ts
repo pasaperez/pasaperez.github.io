@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +29,7 @@ import { Language, LanguageService, PersonalData } from '../../../core/services/
     </header>
   `,
   imports: [MatToolbar, MatButtonModule, MatIconModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     .header-container {
       position: sticky;

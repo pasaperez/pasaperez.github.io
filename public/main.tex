@@ -19,7 +19,8 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\input{glyphtounicode}
+\usepackage{needspace}
+\ifdefined\pdfgentounicode\input{glyphtounicode}\fi
 
 
 %----------FONT OPTIONS----------
@@ -59,7 +60,7 @@
 }{}{0em}{}[\color{black}\titlerule \vspace{-3pt}]
 
 % Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
+\ifdefined\pdfgentounicode\pdfgentounicode=1\fi
 
 %-------------------------
 % Custom commands - Ajustados para más espacio
@@ -70,7 +71,7 @@
 }
 
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-1pt}\item
+  \needspace{4\baselineskip}\vspace{-1pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
@@ -115,37 +116,65 @@
 
 \begin{center}
     \textbf{\Huge \scshape Angel Perez} \\ \vspace{2pt}
-    \small \textbf{Information Systems Engineer - University Systems Analyst}
+    \small \textbf{Information Systems Engineer}
     --
-    \small \textbf{Backend Developer} \\ \vspace{2pt}
-    \small \href{tel:+542614699639}{\underline{+54 2614699639}} $|$ \href{mailto:pasaperez@yahoo.com.ar}{\underline{pasaperez@yahoo.com.ar}} $|$ 
+    \small \textbf{Senior Software Engineer \& Software Architect} \\ \vspace{2pt}
+    \small \href{tel:+542614699639}{\underline{+54 2614699639}} $|$ \href{mailto:pasaperez@yahoo.com.ar}{\underline{pasaperez@yahoo.com.ar}} $|$
     \href{https://www.linkedin.com/in/pasaperez}{\underline{linkedin.com/in/pasaperez}} $|$
     \href{https://github.com/pasaperez}{\underline{github.com/pasaperez}}
 \end{center}
 
 
 \section{Summary}
-I am an Information Systems Engineer and Backend Developer with over 7 years of experience designing, modernizing, and maintaining scalable, enterprise-grade web applications. I combine a strong foundation in Full-Stack development, DevOps methodologies, and secure software engineering with proven leadership in establishing coding standards and mentoring high-performing backend and full-stack teams. Specialized in CI/CD processes, production environment management, and delivering robust solutions that significantly improve system availability, drive operational efficiency, and create long-term business value.
+I am an Information Systems Engineer, Senior software engineer and architect with over 7 years of experience designing, modernizing and operating scalable enterprise-grade platforms, from high-volume fintech payment services to a multi-tenant SaaS I co-founded, architected and took to production. Strong foundation in Java/Spring Boot, TypeScript, event-driven and modular architectures, CI/CD and secure production operations, with proven leadership in establishing coding standards and mentoring backend and full-stack teams. Co-creator of DevFlow, a spec-driven development method that lets AI coding agents deliver production code under independent review and verifiable quality gates.
 
 %-----------PROGRAMMING SKILLS-----------
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Languages \& Runtimes}{: Java, JavaScript/TypeScript (NodeJS, V8, Bun), C/C++, Python, R, Dart} \\[3pt]
-     \textbf{Backend \& Testing}{: Spring, Hibernate, Express, Sequelize, Mongoose, Jest, JUnit} \\[3pt]
-     \textbf{Frontend}{: Angular, React, DurandalJS, Knockout, Thymeleaf, HTML/CSS, AlpineJS, Bootstrap, Flutter} \\[3pt]
-     \textbf{Databases}{: MySQL, MariaDB, PostgreSQL, MS SQL Server, SQLite, H2, MongoDB, DynamoDB, Firestore} \\[3pt]
-     \textbf{DevOps \& Cloud}{: Git, Docker, Kubernetes, Jenkins, Selenium, GCP, AWS, OpenShift, Groovy} \\[3pt]
-     \textbf{Architecture \& Patterns}{: Microservices, Event-driven, REST APIs, MVC, DDD, TDD, BDD, OOP} \\[3pt]
-     \textbf{Methodologies}{: Agile (Scrum, Kanban), CI/CD Pipelines, Gitflow, Code Review, Clean Code, DevOps}
+     \textbf{Languages \& Runtimes}{: Java, JavaScript/TypeScript (NodeJS, V8, Bun), Go, C/C++, Python, R, Dart} \\[3pt]
+     \textbf{Backend \& Testing}{: Spring (Boot, Security, Data JPA), Hibernate, Flyway, Querydsl, MapStruct, Express, Sequelize, Mongoose, Jest, JUnit, Testcontainers, Vitest, Playwright} \\[3pt]
+     \textbf{Frontend}{: Angular, React, TanStack Query, Vite, DurandalJS, Knockout, Thymeleaf, HTML/CSS, AlpineJS, Bootstrap, Flutter} \\[3pt]
+     \textbf{Databases}{: MySQL, MariaDB, PostgreSQL, MS SQL Server, SQLite, H2, MongoDB, CouchDB, DynamoDB, Redis/Valkey, Firestore} \\[3pt]
+     \textbf{DevOps \& Cloud}{: Git, Docker, Kubernetes, GitHub Actions, Jenkins, Caddy, Cloudflare, Sentry, Selenium, GCP, AWS (EC2, Lambda, SQS, KMS), Kong, Nullplatform, OpenShift, Groovy} \\[3pt]
+     \textbf{Architecture \& Patterns}{: Microservices, Modular Monolith, Hexagonal, Event-driven, REST APIs, Multi-tenancy, M2M Authorization (AuthGuard), MVC, DDD, TDD, BDD, OOP} \\[3pt]
+     \textbf{AI Engineering}{: Spec-Driven Development (DevFlow, Spec Kit, OpenSpec), AI coding agents (Claude Code, OpenCode), multi-agent review, LLM integration (DeepSeek, Ollama), document extraction} \\[3pt]
+     \textbf{Methodologies}{: Agile (Scrum, Kanban), CI/CD Pipelines, Gitflow, Code Review, Clean Code, DevOps, Observability}
     }}
  \end{itemize}
 
 %-----------EXPERIENCE-----------
 \section{Professional Experience}
+\resumeSubHeadingListStart
 
 \resumeSubheading
-  {Lead Developer}{May 2023 -- Present}
+  {Co-founder \& Staff Software Engineer}{Jun 2026 -- Nov 2026}
+  {Visto Bueno -- Ojeda \& Perez Asoc. Simp. $|$ \href{https://vistobueno.tech}{\underline{vistobueno.tech}}}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Co-founded and launched to production a rental-operations SaaS (identity and credit checks, AI document reading, case files, contracts) for agencies, tenants, landlords and portals; owned architecture, engineering, deployment and technology decisions, and shaped analysis and product.}
+    \resumeItem{Led the design of a multi-tenant Spring Boot 4 modular monolith (Java 25+, PostgreSQL 16, Flyway, MinIO) with hexagonal boundaries across multiples modules enforced by architecture tests, plus React 19 + TypeScript apps.}
+    \resumeItem{Built AI document reading with DeepSeek, Anthropic and a local Ollama provider to extract identity and income data from ID cards and payslips, plus branded PDF rendering and revision history for AI-drafted lease contracts.}
+    \resumeItem{Owned deployment and operations: one-command Docker Compose deploys to a hardened VPS (rootless Docker, Caddy TLS edge, Cloudflare) with isolated dev/prod, pre-migration DB snapshots and automatic restore and rollback.}
+    \resumeItem{Built GitHub Actions CI/CD with path-scoped suites that rerun only what changed since the last green build, gating $\sim$10,000 JUnit tests, Playwright E2E, 100\% coverage on frontends and immutable migrations.}
+    \resumeItem{Hardened security with tenant isolation, Cloudflare Turnstile and per-origin rate limits on anonymous endpoints, a strict CSP, Google Sign-In, AES-256-GCM-encrypted secrets and PII-free logging with Sentry.}
+    \resumeItem{Co-created DevFlow (spec-driven development for AI agents) and built QAFlow (AI-generated end-to-end QA), behind 230+ reviewed work items and 500+ end-to-end tests (see Key Projects).}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Senior Software Engineer}{Nov 2025 -- Nov 2026}
+  {IT Consultores ITTI SAECA -- Wepa, nationwide payments \& collections network}{Remote}
+  \resumeItemListStart
+    \resumeItem{Owned architecture and delivery of core payment services in a polyglot stack (Java/Spring Boot, Node.js, Python, Go) processing millions of transactions per day, with near-full autonomy over architecture and product decisions.}
+    \resumeItem{Built the cash-in/cash-out API and asynchronous payment pipeline (SQS + Lambda); fixed timeout handling across hundreds of external billers, preventing hundreds of transaction reversals and company-absorbed losses.}
+    \resumeItem{Designed the M2M authorization layer for microservices with AuthGuard, AWS KMS and DynamoDB, standardizing access control across the platform.}
+    \resumeItem{Improved observability and incident detection to diagnose mass outages faster, and masked sensitive data in critical payment flows.}
+    \resumeItem{Reworked deployments from full-system downtime to zero-downtime releases and hotfixes.}
+    \resumeItem{Sustained and modernized a legacy fintech core while delivering new biller and merchant back-office integrations and operational tooling in Angular and React.}
+    \resumeItem{Mentored less-senior engineers in a 10-person team through code reviews and pair programming.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Lead Developer}{May 2023 -- Nov 2025}
   {Pasaperez Asoc. Simple}{Mendoza, Argentina}
   \resumeItemListStart
     \resumeItem{Led the design and development of two core systems, overseeing architecture, implementation, and deployment processes.}
@@ -155,7 +184,7 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
   \resumeItemListEnd
 
   \resumeSubheading
-  {Backend Technical Expert / Chief Operations Engineer}{Aug 2024 -- Present}
+  {Backend Technical Expert / Chief Operations Engineer}{Aug 2024 -- Nov 2025}
   {Slingr}{US-based company/Remote, Mendoza, Argentina}
   \resumeItemListStart
     \resumeItem{Served as technical reference for the backend team, leading the design and implementation of complex solutions while ensuring technical quality.}
@@ -166,7 +195,7 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
   \resumeItemListEnd
 
   \resumeSubheading
-  {Full-Stack Developer}{Nov 2024 -- Present}
+  {Full-Stack Developer}{Nov 2024 -- Nov 2025}
   {Slingr}{US-based company/Remote, Mendoza, Argentina}
   \resumeItemListStart
     \resumeItem{Led the development of new full-stack features within the slingr framework and platform, leveraging Angular, React and TypeScript to enhance user experience and backend performance.}
@@ -185,7 +214,7 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
     \resumeItem{Developed and optimized applications within the platform, focusing on new functionalities, APIs, and performance improvements.}
     \resumeItem{Provided comprehensive technical support, ensuring platform availability and stability for 5,000+ users.}
   \resumeItemListEnd
-  
+
   \resumeSubheading
   {Fullstack Software Developer}{Nov 2021 -- Aug 2022}
   {Software del Sur}{Mendoza, Argentina}
@@ -213,6 +242,7 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
     \resumeItem{Co-authored Metacod System paper presented at 9th National Congress of Computer Engineering (CoNaIISI 2021).}
     \resumeItem{Implemented technology stack: Java/Spring (Backend), ReactJS/HTML/JS/CSS (Frontend), MS SQL Server (Database), Docker (Deployment on Amazon ECS).}
   \resumeItemListEnd
+\resumeSubHeadingListEnd
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -244,7 +274,7 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
 \begin{itemize}[leftmargin=0.15in, label={}]
   \small{\item{
    \textbf{Spanish}: Native \quad $|$ \quad
-   \textbf{English}: Intermediate (B2/C1) \quad $|$ \quad
+   \textbf{English}: Advanced (C1/C2) \quad $|$ \quad
    \textbf{German}: Basic (A1) \quad $|$ \quad
    \textbf{Italian}: Basic (A1)
   }}
@@ -254,7 +284,22 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
 \section{Key Projects \& Achievements}
 \resumeSubHeadingListStart
   \resumeProjectHeading
-    {\textbf{Slingr Platform Modernization} $|$ \emph{Java, Angular, MongoDB, CI/CD}}{2022 -- Present}
+    {\textbf{DevFlow: Spec-Driven Development for AI Coding Agents} $|$ \emph{Claude Code, OpenCode, Bash}}{2026}
+    \resumeItemListStart
+      \resumeItem{Co-created a stack-agnostic SDD method: a validated plan drives each item from spec to code through independent reviewer agents, risk-based tracks, human approval only at real decisions and an append-only evidence journal.}
+      \resumeItem{Built its tooling: a tiered test runner with failed-first reruns, green-tree caching and a global lock, a dependency graph to parallelize items, and a gate that rejects any change adding technical debt.}
+      \resumeItem{Used by the team to deliver 70+ plans and 230+ reviewed items in Visto Bueno; ported to OpenCode and reused in a second codebase.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{QAFlow: AI-Generated End-to-End QA for a Whole System} $|$ \emph{Claude Code, Playwright, Chrome MCP}}{2026}
+    \resumeItemListStart
+      \resumeItem{Built an AI QA method in which an agent explores the entire application as a real user (black box, real browser), logs every defect it hits and turns each explored path into Playwright tests that stay as regression.}
+      \resumeItem{Its runs grew Visto Bueno's end-to-end suite from zero to 500+ tests (53 specs, 30 reusable helpers) covering happy, sad and edge paths, UX and multi-tenant isolation, and logged 148 findings across 19 runs.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Slingr Platform Modernization} $|$ \emph{Java, Angular, MongoDB, CI/CD}}{2022 -- 2025}
     \resumeItemListStart
       \resumeItem{Led comprehensive platform migration from Java 8 to Java 24, serving 5,000+ active users with enhanced performance and security compliance.}
       \resumeItem{Achieved 30-7000\% performance optimization across multiple core platform processes through architectural improvements and code refactoring.}
@@ -280,9 +325,10 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
     \resumeItemListEnd
 
   \resumeProjectHeading
-    {\textbf{Elixir Framework (Personal Project)} $|$ \emph{Open Source, Microservices}}{Ongoing}
+    {\textbf{Elixir Framework (Personal Project)} $|$ \emph{Open Source, Microservices} $|$ \href{https://github.com/pasaperez/elixir}{\underline{github.com/pasaperez/elixir}}}{Ongoing}
     \resumeItemListStart
       \resumeItem{Developed a wrapper framework to simplify microservices development for CRUD operations in REST APIs, accelerating development cycles.}
+      \resumeItem{Spring Boot base layer with generic controllers, services and repositories, a standardized APIResponse, global error handling, CORS and health endpoints: a full CRUD REST API takes four classes per entity.}
     \resumeItemListEnd
 \resumeSubHeadingListEnd
 
@@ -290,7 +336,7 @@ I am an Information Systems Engineer and Backend Developer with over 7 years of 
 \section{Professional Interests}
 \begin{itemize}[leftmargin=0.15in, label={}]
   \small{\item{
-   Open to opportunities in: \textbf{Backend Engineering} $|$ \textbf{Full-Stack Development} $|$ \textbf{Technical Leadership} $|$ \textbf{Platform Engineering} $|$ \textbf{DevOps/SRE}
+   Open to opportunities in: \textbf{Backend Engineering} $|$ \textbf{Full-Stack Development} $|$ \textbf{Technical Leadership} $|$ \textbf{Platform Engineering} $|$ \textbf{Technical Expert} $|$ \textbf{AI Engineering}
   }}
 \end{itemize}
 %-------------------------------------------

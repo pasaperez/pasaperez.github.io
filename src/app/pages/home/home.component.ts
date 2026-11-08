@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatDivider} from '@angular/material/divider';
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 import {MatIcon} from '@angular/material/icon';
@@ -44,7 +44,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
               </div>
             </div>
             <div class="hero-actions">
-              <a mat-raised-button color="primary" class="cta-button" href="/Angel_Perez_CV_2025.pdf" download="Angel_Perez_CV.pdf">
+              <a mat-raised-button color="primary" class="cta-button" href="/Angel_Perez_CV_2026.pdf" download="Angel_Perez_CV.pdf">
                 <mat-icon>download</mat-icon>
                 {{getTranslation('downloadCV')}}
               </a>
@@ -89,9 +89,41 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
+              <h4>{{getTranslation('vistobueno_title')}}</h4>
+              <h5><a href="https://vistobueno.tech" target="_blank" rel="noopener">{{getTranslation('vistobueno_company')}}</a></h5>
+              <span class="period">2026</span>
+              <p>{{getTranslation('vistobueno_location')}}</p>
+              <ul>
+                <li>{{getTranslation('vistobueno_desc1')}}</li>
+                <li>{{getTranslation('vistobueno_desc2')}}</li>
+                <li>{{getTranslation('vistobueno_desc3')}}</li>
+                <li>{{getTranslation('vistobueno_desc4')}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h4>{{getTranslation('itti_title')}}</h4>
+              <h5>{{getTranslation('itti_company')}}</h5>
+              <span class="period">2025 - 2026</span>
+              <p>{{getTranslation('itti_location')}}</p>
+              <ul>
+                <li>{{getTranslation('itti_desc1')}}</li>
+                <li>{{getTranslation('itti_desc2')}}</li>
+                <li>{{getTranslation('itti_desc3')}}</li>
+                <li>{{getTranslation('itti_desc4')}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
               <h4>{{getTranslation('slingr_title')}}</h4>
               <h5>{{getTranslation('slingr_company')}}</h5>
-              <span class="period">2022 - {{getTranslation('present')}}</span>
+              <span class="period">2022 - 2025</span>
               <p>{{getTranslation('workingRemotely')}}</p>
               <ul>
                 <li>{{getTranslation('slingr_desc1')}}</li>
@@ -187,6 +219,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
                   <mat-chip class="skill-professional">Node.js</mat-chip>
                   <mat-chip class="skill-professional">Express.js</mat-chip>
                   <mat-chip class="skill-intermediate">Python</mat-chip>
+                  <mat-chip class="skill-intermediate">Go</mat-chip>
                   <mat-chip class="skill-intermediate">C/C++</mat-chip>
                 </mat-chip-set>
               </div>
@@ -227,6 +260,8 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
                 <mat-chip-set>
                   <mat-chip class="skill-professional">MongoDB</mat-chip>
                   <mat-chip class="skill-intermediate">DynamoDB</mat-chip>
+                  <mat-chip class="skill-intermediate">CouchDB</mat-chip>
+                  <mat-chip class="skill-intermediate">Redis/Valkey</mat-chip>
                 </mat-chip-set>
               </div>
             </div>
@@ -249,6 +284,11 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
                   <mat-chip class="skill-professional">GCP</mat-chip>
                   <mat-chip class="skill-professional">Jenkins</mat-chip>
                   <mat-chip class="skill-professional">GitHub Actions</mat-chip>
+                  <mat-chip class="skill-professional">Caddy</mat-chip>
+                  <mat-chip class="skill-professional">Cloudflare</mat-chip>
+                  <mat-chip class="skill-professional">Sentry</mat-chip>
+                  <mat-chip class="skill-intermediate">AWS Lambda / SQS / KMS</mat-chip>
+                  <mat-chip class="skill-intermediate">Kong</mat-chip>
                 </mat-chip-set>
               </div>
               <div class="skill-group">
@@ -256,6 +296,9 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
                 <mat-chip-set>
                   <mat-chip class="skill-professional">Selenium</mat-chip>
                   <mat-chip class="skill-professional">CI/CD</mat-chip>
+                  <mat-chip class="skill-professional">Testcontainers</mat-chip>
+                  <mat-chip class="skill-professional">Playwright</mat-chip>
+                  <mat-chip class="skill-professional">Vitest</mat-chip>
                   <mat-chip class="skill-intermediate">Unit Testing</mat-chip>
                 </mat-chip-set>
               </div>
@@ -274,6 +317,10 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
                 <mat-chip-set>
                   <mat-chip class="skill-expert">REST Architecture</mat-chip>
                   <mat-chip class="skill-expert">Microservices</mat-chip>
+                  <mat-chip class="skill-advanced">Hexagonal Architecture</mat-chip>
+                  <mat-chip class="skill-advanced">Modular Monolith</mat-chip>
+                  <mat-chip class="skill-advanced">Event-driven</mat-chip>
+                  <mat-chip class="skill-advanced">Multi-tenancy</mat-chip>
                   <mat-chip class="skill-advanced">MVC Pattern</mat-chip>
                   <mat-chip class="skill-advanced">DDD</mat-chip>
                   <mat-chip class="skill-advanced">TDD</mat-chip>
@@ -300,6 +347,29 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
                   <mat-chip class="skill-professional">XP</mat-chip>
                   <mat-chip class="skill-professional">Agile</mat-chip>
                   <mat-chip class="skill-intermediate">Waterfall</mat-chip>
+                </mat-chip-set>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="skill-category" [expanded]="allExpanded">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>smart_toy</mat-icon>
+                {{getTranslation('aiEngineering')}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="skills-content">
+              <div class="skill-group">
+                <mat-chip-set>
+                  <mat-chip class="skill-expert">Spec-Driven Development (DevFlow)</mat-chip>
+                  <mat-chip class="skill-advanced">Spec Kit</mat-chip>
+                  <mat-chip class="skill-advanced">OpenSpec</mat-chip>
+                  <mat-chip class="skill-expert">AI-generated E2E QA (QAFlow)</mat-chip>
+                  <mat-chip class="skill-advanced">Claude Code</mat-chip>
+                  <mat-chip class="skill-advanced">Multi-agent Review</mat-chip>
+                  <mat-chip class="skill-professional">OpenCode</mat-chip>
+                  <mat-chip class="skill-professional">LLM Integration (DeepSeek, Anthropic, Ollama)</mat-chip>
                 </mat-chip-set>
               </div>
             </div>
@@ -374,7 +444,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
               </div>
               <div class="language-item">
                 <span class="language-name">{{getTranslation('english')}}</span>
-                <span class="language-level intermediate">{{getTranslation('intermediate')}}(B2)/{{getTranslation('advanced')}} (C1)</span>
+                <span class="language-level advanced">{{getTranslation('advanced')}} (C1/C2)</span>
               </div>
               <div class="language-item">
                 <span class="language-name">{{getTranslation('german')}}</span>
@@ -476,6 +546,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
       </section>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     /* Home Component Styles - Consistent with Header/Footer */
 
@@ -754,6 +825,15 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
       font-weight: 500;
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
+    }
+
+    .timeline-content h5 a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .timeline-content h5 a:hover {
+      text-decoration: underline;
     }
 
     .timeline-content .period {
@@ -1039,6 +1119,7 @@ import {LanguageService, PersonalData} from '../../core/services/language.servic
       color: white;
     }
 
+    .language-level.advanced,
     .language-level.intermediate {
       background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
       color: white;

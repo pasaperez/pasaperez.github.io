@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {LanguageService, PersonalData} from '../../../core/services/language.service';
 
@@ -31,6 +31,7 @@ import {LanguageService, PersonalData} from '../../../core/services/language.ser
     </footer>
   `,
   imports: [MatIconModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     .footer {
       background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);

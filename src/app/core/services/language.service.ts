@@ -90,6 +90,7 @@ export interface PersonalData {
   testingTools: string;
   designPatternsTitle: string;
   developmentMethodologies: string;
+  aiEngineering: string;
 
   // Experience details
   jobTitle: string;
@@ -118,6 +119,20 @@ export interface PersonalData {
   educationSection: string;
   contactSection: string;
 
+  vistobueno_title: string;
+  vistobueno_company: string;
+  vistobueno_location: string;
+  vistobueno_desc1: string;
+  vistobueno_desc2: string;
+  vistobueno_desc3: string;
+  vistobueno_desc4: string;
+  itti_title: string;
+  itti_company: string;
+  itti_location: string;
+  itti_desc1: string;
+  itti_desc2: string;
+  itti_desc3: string;
+  itti_desc4: string;
   slingr_title: string;
   slingr_company: string;
   slingr_location: string;
@@ -195,7 +210,7 @@ export class LanguageService {
     es: {
       portfolio: 'Portafolio',
       name: 'Angel Santiago Perez',
-      title: 'Ingeniero en Sistemas - Analista de Sistemas - Desarrollador Backend',
+      title: 'Ingeniero en Sistemas - Ingeniero de Software Senior y Arquitecto de Software',
       summary: 'Resumen',
       experience: 'Experiencia Profesional',
       skills: 'Conocimientos Tecnológicos',
@@ -235,7 +250,7 @@ export class LanguageService {
       present: 'Presente',
       repositories: 'Repositorios',
       clickToMinimize: 'Hacer clic para minimizar',
-      pageFooter: 'Esta página web fue hecha desde cero por mi mismo. Desarrollado con Angular 20 Zoneless, alojado en GitHub Pages.',
+      pageFooter: 'Esta página web fue hecha desde cero por mi mismo. Desarrollado con Angular 22 Zoneless, alojado en GitHub Pages.',
       native: 'Nativo',
       intermediate: 'Intermedio',
       basic: 'Básico',
@@ -249,12 +264,12 @@ export class LanguageService {
       collapseAll: 'Contraer Todo',
 
       // New properties
-      aboutMeDescription: 'Soy un Ingeniero en Sistemas con más de '+experienceYears+' años de experiencia especializándome en desarrollo backend y arquitectura de sistemas escalables. Actualmente trabajo como Backend Technical Expert en Slingr, donde lidero equipos técnicos y diseño soluciones empresariales robustas.',
+      aboutMeDescription: 'Soy un Ingeniero en Sistemas con más de '+experienceYears+' años de experiencia especializándome en desarrollo backend y arquitectura de sistemas escalables. Cofundé Visto Bueno, una plataforma SaaS para operaciones de alquiler, donde lideré arquitectura, ingeniería y despliegue hasta llevarla a producción, y trabajé como Senior Software Engineer en itti construyendo servicios core de pagos para la red Wepa.',
       experienceYears: experienceYears+'+',
-      currentPosition: 'Backend Technical Expert / Chief Operations Engineer',
-      currentCompany: 'Slingr',
+      currentPosition: 'Cofundador y Staff Software Engineer',
+      currentCompany: 'Visto Bueno',
       workingRemotely: 'Trabajo Remoto',
-      specializedIn: 'Especializado en desarrollo backend, arquitectura de microservicios, CI/CD y liderazgo técnico',
+      specializedIn: 'Especializado en desarrollo backend, arquitectura de microservicios, CI/CD, liderazgo técnico e ingeniería de software con agentes de IA',
       keyStrengths: 'Fortalezas Clave',
       techStack: 'Stack Tecnológico',
       personalRepos: 'Repositorios Personales',
@@ -277,6 +292,7 @@ export class LanguageService {
       testingTools: 'Testing & QA',
       designPatternsTitle: 'Patrones de Diseño',
       developmentMethodologies: 'Metodologías de Desarrollo',
+      aiEngineering: 'Ingeniería con IA',
 
       // Experience details
       jobTitle: 'Cargo',
@@ -304,6 +320,20 @@ export class LanguageService {
       projectsSection: 'Proyectos',
       educationSection: 'Formación',
       contactSection: 'Contacto',
+      vistobueno_title: "Cofundador y Staff Software Engineer",
+      vistobueno_company: "Visto Bueno · Ojeda & Perez Asoc. Simp.",
+      vistobueno_location: "Mendoza, Argentina",
+      vistobueno_desc1: "Cofundé y llevé a producción una plataforma SaaS para operaciones de alquiler (inmobiliarias, inquilinos, propietarios y portales); lideré arquitectura, ingeniería, despliegue y decisiones de tecnología",
+      vistobueno_desc2: "Monolito modular multi-tenant en Spring Boot 4 con arquitectura hexagonal, PostgreSQL, frontends React y lectura de documentos con IA (DeepSeek, Anthropic, Ollama)",
+      vistobueno_desc3: "Deploys en un comando a VPS con Docker, Caddy y Cloudflare, con snapshot de la base, restauración y rollback automáticos; CI/CD en GitHub Actions con ~10.000 tests",
+      vistobueno_desc4: "Cocreador de DevFlow (desarrollo guiado por especificaciones para agentes de IA, con revisión independiente) y creador de QAFlow (QA end-to-end de sistema completo generado con IA: más de 500 tests de Playwright)",
+      itti_title: "Ingeniero de Software Senior",
+      itti_company: "IT Consultores ITTI SAECA · Wepa",
+      itti_location: "Remoto",
+      itti_desc1: "Arquitectura y entrega de servicios core de pagos de Wepa, red nacional de pagos y cobranzas que procesa millones de transacciones por día",
+      itti_desc2: "API de caja (cash-in/cash-out) y pagos asíncronos con SQS y Lambda; manejo de timeouts con cientos de facturadores externos que evitó cientos de reversas",
+      itti_desc3: "Autorización M2M entre microservicios (AuthGuard, AWS KMS, DynamoDB), observabilidad para detectar caídas y enmascarado de datos sensibles",
+      itti_desc4: "Deploys sin downtime, modernización del core legacy y mentoría con code reviews y pair programming",
       slingr_title: "Experto Técnico Backend / Ingeniero Jefe de Operaciones",
       slingr_company: "Slingr",
       slingr_location: "Remoto, Mendoza, Argentina",
@@ -362,7 +392,7 @@ export class LanguageService {
     en: {
       portfolio: 'Portfolio',
       name: 'Angel Santiago Perez',
-      title: 'Information Systems Engineer - Systems Analyst - Backend Developer',
+      title: 'Information Systems Engineer - Senior Software Engineer & Software Architect',
       summary: 'Summary',
       experience: 'Professional Experience',
       skills: 'Technical Skills',
@@ -402,7 +432,7 @@ export class LanguageService {
       present: 'Present',
       repositories: 'Repositories',
       clickToMinimize: 'Click to minimize',
-      pageFooter: 'This website was built from scratch by myself. Developed with Angular 20 Zoneless, hosted on GitHub Pages.',
+      pageFooter: 'This website was built from scratch by myself. Developed with Angular 22 Zoneless, hosted on GitHub Pages.',
       native: 'Native',
       intermediate: 'Intermediate',
       basic: 'Basic',
@@ -416,12 +446,12 @@ export class LanguageService {
       collapseAll: 'Collapse All',
 
       // New properties
-      aboutMeDescription: 'I am an Information Systems Engineer with over '+experienceYears+' years of experience specializing in backend development and scalable system architecture. Currently working as Backend Technical Expert at Slingr, where I lead technical teams and design robust enterprise solutions.',
+      aboutMeDescription: 'I am an Information Systems Engineer with over '+experienceYears+' years of experience specializing in backend development and scalable system architecture. I co-founded Visto Bueno, a SaaS platform for rental operations, where I led architecture, engineering and deployment through its production launch, and worked as a Senior Software Engineer at itti building core payment services for the Wepa network.',
       experienceYears: experienceYears+'+',
-      currentPosition: 'Backend Technical Expert / Chief Operations Engineer',
-      currentCompany: 'Slingr',
+      currentPosition: 'Co-founder & Staff Software Engineer',
+      currentCompany: 'Visto Bueno',
       workingRemotely: 'Remote Work',
-      specializedIn: 'Specialized in backend development, microservices architecture, CI/CD and technical leadership',
+      specializedIn: 'Specialized in backend development, microservices architecture, CI/CD, technical leadership and AI-assisted software engineering',
       keyStrengths: 'Key Strengths',
       techStack: 'Tech Stack',
       personalRepos: 'Personal Repositories',
@@ -444,6 +474,7 @@ export class LanguageService {
       testingTools: 'Testing & QA',
       designPatternsTitle: 'Design Patterns',
       developmentMethodologies: 'Development Methodologies',
+      aiEngineering: 'AI Engineering',
 
       // Experience details
       jobTitle: 'Job Title',
@@ -471,6 +502,20 @@ export class LanguageService {
       projectsSection: 'Projects',
       educationSection: 'Education',
       contactSection: 'Contact',
+      vistobueno_title: "Co-founder & Staff Software Engineer",
+      vistobueno_company: "Visto Bueno · Ojeda & Perez Asoc. Simp.",
+      vistobueno_location: "Mendoza, Argentina",
+      vistobueno_desc1: "Co-founded and launched to production a SaaS platform for rental operations (agencies, tenants, landlords and listing portals); led architecture, engineering, deployment and technology decisions",
+      vistobueno_desc2: "Multi-tenant Spring Boot 4 modular monolith with hexagonal architecture, PostgreSQL, React frontends and AI document reading (DeepSeek, Anthropic, Ollama)",
+      vistobueno_desc3: "One-command VPS deploys with Docker, Caddy and Cloudflare, with database snapshots and automatic restore and rollback; GitHub Actions CI/CD gating ~10,000 tests",
+      vistobueno_desc4: "Co-creator of DevFlow (spec-driven development for AI coding agents, with independent review) and creator of QAFlow (AI-generated end-to-end QA for a whole system: 500+ Playwright tests)",
+      itti_title: "Senior Software Engineer",
+      itti_company: "IT Consultores ITTI SAECA · Wepa",
+      itti_location: "Remote",
+      itti_desc1: "Architecture and delivery of core payment services for Wepa, a nationwide payments and collections network processing millions of transactions per day",
+      itti_desc2: "Cash-in/cash-out API and asynchronous payments with SQS and Lambda; timeout handling across hundreds of external billers that prevented hundreds of reversals",
+      itti_desc3: "M2M authorization between microservices (AuthGuard, AWS KMS, DynamoDB), observability to detect outages and masking of sensitive data",
+      itti_desc4: "Zero-downtime deployments, legacy core modernization and mentoring through code reviews and pair programming",
       slingr_title: "Backend Technical Expert / Chief Operations Engineer",
       slingr_company: "Slingr",
       slingr_location: "Remote, Mendoza, Argentina",

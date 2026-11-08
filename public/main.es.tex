@@ -1,0 +1,327 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage{lmodern}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{tabularx}
+\usepackage{needspace}
+\ifdefined\pdfgentounicode\input{glyphtounicode}\fi
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting - Espaciado ligeramente aumentado
+\titleformat{\section}{
+  \vspace{-2pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-3pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\ifdefined\pdfgentounicode\pdfgentounicode=1\fi
+
+%-------------------------
+% Custom commands - Ajustados para más espacio
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-1pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \needspace{4\baselineskip}\vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-3pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Angel Perez} \\ \vspace{2pt}
+    \small \textbf{Ingeniero en Sistemas de Información}
+    --
+    \small \textbf{Ingeniero de Software Senior y Arquitecto de Software} \\ \vspace{2pt}
+    \small \href{tel:+542614699639}{\underline{+54 2614699639}} $|$ \href{mailto:pasaperez@yahoo.com.ar}{\underline{pasaperez@yahoo.com.ar}} $|$
+    \href{https://www.linkedin.com/in/pasaperez}{\underline{linkedin.com/in/pasaperez}} $|$
+    \href{https://github.com/pasaperez}{\underline{github.com/pasaperez}}
+\end{center}
+
+\section{Resumen}
+Soy Ingeniero en Sistemas de Información, ingeniero de software senior y arquitecto, con más de 7 años de experiencia diseñando, modernizando y operando plataformas escalables de nivel empresarial, desde servicios de pagos fintech de alto volumen hasta un SaaS multi-tenant que cofundé, diseñé y llevé a producción. Sólida base en Java/Spring Boot, TypeScript, arquitecturas modulares y orientadas a eventos, CI/CD y operación segura en producción, con liderazgo comprobado en la definición de estándares de código y la mentoría de equipos backend y full-stack. Cocreador de DevFlow, un método de desarrollo guiado por especificaciones que permite a agentes de IA entregar código de producción bajo revisión independiente y gates de calidad verificables.
+
+\section{Habilidades Técnicas}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Lenguajes y Runtimes}{: Java, JavaScript/TypeScript (NodeJS, V8, Bun), Go, C/C++, Python, R, Dart} \\[3pt]
+     \textbf{Backend y Testing}{: Spring (Boot, Security, Data JPA), Hibernate, Flyway, Querydsl, MapStruct, Express, Sequelize, Mongoose, Jest, JUnit, Testcontainers, Vitest, Playwright} \\[3pt]
+     \textbf{Frontend}{: Angular, React, TanStack Query, Vite, DurandalJS, Knockout, Thymeleaf, HTML/CSS, AlpineJS, Bootstrap, Flutter} \\[3pt]
+     \textbf{Bases de Datos}{: MySQL, MariaDB, PostgreSQL, MS SQL Server, SQLite, H2, MongoDB, CouchDB, DynamoDB, Redis/Valkey, Firestore} \\[3pt]
+     \textbf{DevOps y Cloud}{: Git, Docker, Kubernetes, GitHub Actions, Jenkins, Caddy, Cloudflare, Sentry, Selenium, GCP, AWS (EC2, Lambda, SQS, KMS), Kong, Nullplatform, OpenShift, Groovy} \\[3pt]
+     \textbf{Arquitectura y Patrones}{: Microservicios, Monolito Modular, Hexagonal, Orientada a eventos, APIs REST, Multi-tenancy, Autorización M2M (AuthGuard), MVC, DDD, TDD, BDD, POO} \\[3pt]
+     \textbf{Ingeniería con IA}{: Desarrollo guiado por especificaciones (DevFlow, Spec Kit, OpenSpec), agentes de IA para programar (Claude Code, OpenCode), revisión multiagente, integración de LLMs (DeepSeek, Ollama), extracción de documentos} \\[3pt]
+     \textbf{Metodologías}{: Ágiles (Scrum, Kanban), Pipelines CI/CD, Gitflow, Code Review, Clean Code, DevOps, Observabilidad}
+    }}
+ \end{itemize}
+
+\section{Experiencia Profesional}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+  {Cofundador y Staff Software Engineer}{Jun 2026 -- Nov 2026}
+  {Visto Bueno -- Ojeda \& Perez Asoc. Simp. $|$ \href{https://vistobueno.tech}{\underline{vistobueno.tech}}}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Cofundé y llevé a producción un SaaS para operaciones de alquiler (verificación de identidad y crédito, lectura de documentos con IA, legajos, contratos) para inmobiliarias, inquilinos, propietarios y portales; a cargo de arquitectura, ingeniería, despliegue y decisiones de tecnología, e incidí en el análisis y el producto.}
+    \resumeItem{Lideré el diseño de un monolito modular multi-tenant en Spring Boot 4 (Java 25+, PostgreSQL 16, Flyway, MinIO) con límites hexagonales entre múltiples módulos validados con tests de arquitectura, más aplicaciones en React 19 + TypeScript.}
+    \resumeItem{Construí la lectura de documentos con IA usando DeepSeek, Anthropic y un proveedor local Ollama para extraer datos de identidad e ingresos de DNI y recibos de sueldo, además de generación de PDF con marca e historial de revisiones para contratos de alquiler redactados con IA.}
+    \resumeItem{Me encargué del despliegue y la operación: despliegues con Docker Compose en un solo comando a un VPS endurecido (Docker rootless, borde TLS con Caddy, Cloudflare), con dev/prod aislados, snapshots de la base previos a las migraciones y restauración y rollback automáticos.}
+    \resumeItem{Construí CI/CD con GitHub Actions y suites por ruta que solo reejecutan lo que cambió desde el último build en verde, controlando $\sim$10.000 tests JUnit, E2E con Playwright, 100\% de cobertura en frontends y migraciones inmutables.}
+    \resumeItem{Reforcé la seguridad con aislamiento por tenant, Cloudflare Turnstile y límites de tasa en endpoints anónimos, CSP estricta, Google Sign-In, secretos cifrados con AES-256-GCM y logs sin datos personales con Sentry.}
+    \resumeItem{Cocreé DevFlow (desarrollo guiado por especificaciones para agentes de IA) y construí QAFlow (QA end-to-end generado con IA), detrás de más de 230 ítems de trabajo revisados y más de 500 tests end-to-end (ver Proyectos Clave).}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Ingeniero de Software Senior}{Nov 2025 -- Nov 2026}
+  {IT Consultores ITTI SAECA -- Wepa, red nacional de pagos y cobranzas}{Remoto}
+  \resumeItemListStart
+    \resumeItem{A cargo de la arquitectura y la entrega de servicios centrales de pagos en un stack políglota (Java/Spring Boot, Node.js, Python, Go) que procesa millones de transacciones por día, con casi total autonomía en decisiones de arquitectura y producto.}
+    \resumeItem{Construí la API de cash-in/cash-out y el pipeline asíncrono de pagos (SQS + Lambda); corregí el manejo de timeouts frente a cientos de facturadores externos, evitando cientos de reversiones de transacciones y pérdidas absorbidas por la empresa.}
+    \resumeItem{Diseñé la capa de autorización M2M para microservicios con AuthGuard, AWS KMS y DynamoDB, estandarizando el control de acceso en toda la plataforma.}
+    \resumeItem{Mejoré la observabilidad y la detección de incidentes para diagnosticar caídas masivas más rápido, y enmascaré datos sensibles en los flujos críticos de pago.}
+    \resumeItem{Transformé los despliegues, que implicaban caída total del sistema, en releases y hotfixes sin downtime.}
+    \resumeItem{Sostuve y modernicé el core fintech legado mientras entregaba nuevas integraciones con facturadores y back-office de comercios, y herramientas operativas en Angular y React.}
+    \resumeItem{Mentoreé a ingenieros menos senior en un equipo de 10 personas mediante code reviews y pair programming.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Desarrollador Líder}{May 2023 -- Nov 2025}
+  {Pasaperez Asoc. Simple}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Lideré el diseño y desarrollo de dos sistemas centrales, supervisando arquitectura, implementación y procesos de despliegue.}
+    \resumeItem{Dirigí la creación de una plataforma de integración con exchanges, asegurando un procesamiento de datos eficiente y una comunicación confiable entre servicios backend.}
+    \resumeItem{Supervisé el desarrollo de un sistema de análisis y categorización de videos impulsado por modelos de IA, promoviendo la innovación y la automatización dentro de la organización.}
+    \resumeItem{Aseguré calidad, escalabilidad y buenas prácticas en los equipos de backend y frontend.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Experto Técnico Backend / Ingeniero Jefe de Operaciones}{Ago 2024 -- Nov 2025}
+  {Slingr}{Remoto, empresa de EE. UU.}
+  \resumeItemListStart
+    \resumeItem{Referente técnico del equipo backend, liderando el diseño y la implementación de soluciones complejas y garantizando la calidad técnica.}
+    \resumeItem{Realicé code reviews para asegurar que los entregables cumplieran los estándares de calidad, las buenas prácticas y los procesos establecidos.}
+    \resumeItem{Gestioné los pipelines de CI/CD, supervisé la infraestructura cloud e implementé automatizaciones para optimizar los flujos de despliegue.}
+    \resumeItem{Propuse e implementé mejoras de calidad, productividad y procesos internos.}
+    \resumeItem{Colaboré en planificación, identificación de riesgos y asignación de recursos técnicos.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Desarrollador Full-Stack}{Nov 2024 -- Nov 2025}
+  {Slingr}{Remoto, empresa de EE. UU.}
+  \resumeItemListStart
+    \resumeItem{Lideré el desarrollo de nuevas funcionalidades full-stack dentro del framework y la plataforma de Slingr, usando Angular, React y TypeScript para mejorar la experiencia de usuario y el rendimiento del backend.}
+    \resumeItem{Implementé componentes frontend modulares y APIs RESTful, asegurando escalabilidad y mantenibilidad entre proyectos.}
+    \resumeItem{Integré prácticas DevOps con equipos multifuncionales, automaticé despliegues y mejoré los pipelines de CI/CD.}
+    \resumeItem{Contribuí a la modernización de la arquitectura, incorporando buenas prácticas de calidad de código, seguridad, documentación y testing.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Ingeniero de Sistemas / Desarrollador Backend}{Dic 2022 -- Oct 2024}
+  {Slingr}{Remoto, empresa de EE. UU.}
+  \resumeItemListStart
+    \resumeItem{Diseñé, desarrollé y mantuve integraciones clave de la plataforma de Slingr, asegurando la interoperabilidad entre servicios con Java y Node.js.}
+    \resumeItem{Di charlas técnicas internas sobre arquitectura de la plataforma y buenas prácticas, fomentando el intercambio de conocimiento entre equipos de ingeniería.}
+    \resumeItem{Trabajé en componentes centrales de la plataforma, como gestión de bases de datos, balanceo de carga y optimización de rendimiento.}
+    \resumeItem{Desarrollé y optimicé aplicaciones dentro de la plataforma, enfocándome en nuevas funcionalidades, APIs y mejoras de rendimiento.}
+    \resumeItem{Garanticé la disponibilidad y estabilidad de la plataforma para más de 5.000 usuarios.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Desarrollador de Software Fullstack}{Nov 2021 -- Ago 2022}
+  {Software del Sur}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Desarrollé plataformas web de gestión clínica, comercial y operativa.}
+    \resumeItem{Desarrollé interfaces para integraciones con servicios comerciales usando NodeJS (Backend), Angular 8+ (Frontend) y MySQL/MariaDB.}
+    \resumeItem{Mentoreé a 5 desarrolladores junior, estableciendo estándares de código y realizando code reviews para asegurar entregables de calidad.}
+    \resumeItem{Implementé Git/Bitbucket y gestioné requerimientos con Trello.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Analista Funcional y Desarrollador de Software}{Mar 2020 -- Ago 2022}
+  {Pasaperez Asoc. Simple (Concurrente)}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Analicé, diseñé y desarrollé un Sistema de Gestión de Contenidos para la administración pública.}
+    \resumeItem{Utilicé Java/Spring/NodeJS (Backend), Angular 14/HTML/JS/CSS/Thymeleaf (Frontend), MS SQL Server y MongoDB (Base de datos).}
+    \resumeItem{Desplegué las soluciones con Kubernetes/OpenFaaS en Google Kubernetes Engine (GCP).}
+  \resumeItemListEnd
+
+  \resumeSubheading
+  {Ingeniero de Sistemas}{Mar 2021 -- Dic 2021}
+  {Grupo Metacod (Concurrente)}{Mendoza, Argentina}
+  \resumeItemListStart
+    \resumeItem{Lideré la gestión del proyecto, el análisis, diseño, desarrollo, testing e implementación de un Sistema Generador de Código con Modelador Web.}
+    \resumeItem{Coautor del paper del Sistema Metacod presentado en el 9.º Congreso Nacional de Ingeniería Informática (CoNaIISI 2021).}
+    \resumeItem{Implementé el stack tecnológico: Java/Spring (Backend), ReactJS/HTML/JS/CSS (Frontend), MS SQL Server (Base de datos), Docker (despliegue en Amazon ECS).}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Educación}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Universidad Tecnológica Nacional}{Mendoza, Argentina}
+      {Ingeniería en Sistemas de Información}{Mar 2014 -- Ago 2022}
+    \resumeSubheading
+      {Universidad Tecnológica Nacional}{Mendoza, Argentina}
+      {Analista Universitario de Sistemas}{Mar 2014 -- Ago 2022}
+  \resumeSubHeadingListEnd
+
+\section{Publicaciones y Certificaciones}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {9.º Congreso Nacional de Ingeniería Informática (CoNaIISI 2021)}{2021}
+    {Coautor del trabajo de investigación del Sistema Metacod}{Argentina}
+  \resumeSubheading
+    {Introduction to Front-end Development with ReactJS}{2020}
+    {Certificación profesional}{Online}
+  \resumeSubheading
+    {Blockchain and Bitcoin Principles}{2020}
+    {Certificación profesional}{Online}
+\resumeSubHeadingListEnd
+
+\section{Idiomas}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+   \textbf{Español}: Nativo \quad $|$ \quad
+   \textbf{Inglés}: Avanzado (C1/C2) \quad $|$ \quad
+   \textbf{Alemán}: Básico (A1) \quad $|$ \quad
+   \textbf{Italiano}: Básico (A1)
+  }}
+\end{itemize}
+
+\section{Proyectos Clave y Logros}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{DevFlow: Desarrollo Guiado por Especificaciones para Agentes de IA} $|$ \emph{Claude Code, OpenCode, Bash}}{2026}
+    \resumeItemListStart
+      \resumeItem{Cocreé un método SDD agnóstico al stack: un plan validado lleva cada ítem de la especificación al código con agentes revisores independientes, tracks según riesgo, aprobación humana solo en decisiones reales y un journal de evidencia append-only.}
+      \resumeItem{Construí su tooling: un test runner por niveles con reejecución de fallidos primero, caché de árbol en verde y lock global, un grafo de dependencias para paralelizar ítems y un gate que rechaza cualquier cambio que agregue deuda técnica.}
+      \resumeItem{Usado por el equipo para entregar más de 70 planes y más de 230 ítems revisados en Visto Bueno; portado a OpenCode y reutilizado en un segundo codebase.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{QAFlow: QA End-to-End con IA para un Sistema Completo} $|$ \emph{Claude Code, Playwright, Chrome MCP}}{2026}
+    \resumeItemListStart
+      \resumeItem{Construí un método de QA con IA en el que un agente explora toda la aplicación como un usuario real (caja negra, navegador real), registra cada defecto que encuentra y convierte cada camino explorado en tests de Playwright que quedan como regresión.}
+      \resumeItem{Sus corridas llevaron la suite end-to-end de Visto Bueno de cero a más de 500 tests (53 specs, 30 helpers) que cubren caminos felices, tristes y de borde, UX y aislamiento multi-tenant, y registraron 148 hallazgos en 19 corridas.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Modernización de la Plataforma Slingr} $|$ \emph{Java, Angular, MongoDB, CI/CD}}{2022 -- 2025}
+    \resumeItemListStart
+      \resumeItem{Lideré la migración integral de la plataforma de Java 8 a Java 24, con más de 5.000 usuarios activos y mejoras de rendimiento y cumplimiento de seguridad.}
+      \resumeItem{Logré optimizaciones de rendimiento del 30 al 7000\% en múltiples procesos centrales mediante mejoras de arquitectura y refactorización de código.}
+      \resumeItem{Orquesté la migración del frontend de DurandalJS a Angular y la actualización de la base de datos de MongoDB 4 a 8, con despliegue de bajo downtime.}
+      \resumeItem{Reduje los tiempos de build de CI/CD en un 83\% mediante la optimización de pipelines y mejoras de automatización.}
+      \resumeItem{Obtuve con éxito las certificaciones de seguridad HIPAA y SOC 2, implementando procesos formales de entrega y despliegue para releases y hotfixes.}
+      \resumeItem{Lideré y mentoreé un equipo de hasta 15 desarrolladores, estableciendo estándares de código.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Sistema Generador de Código Metacod} $|$ \emph{Java/Spring, ReactJS, Docker, AWS}}{2021}
+    \resumeItemListStart
+      \resumeItem{Diseñé e implementé un sistema web de generación de código que redujo en un 97\% el tiempo de inicialización de proyectos en fábricas de software (de 4 meses a 1 semana) en 4 proyectos empresariales.}
+      \resumeItem{Coautor y expositor del paper en CoNaIISI 2021.}
+    \resumeItemListEnd
+
+    \resumeProjectHeading
+    {\textbf{Sistema de Clasificación de Videos con IA} $|$ \emph{Bun, IA/ML, Microservicios, Benchmarking}}{2025 -- Actualidad}
+    \resumeItemListStart
+      \resumeItem{Diseñé e implementé un sistema de clasificación automática capaz de procesar hasta 8.000 videos y más de 500 horas de material con modelos de IA avanzados.}
+      \resumeItem{Realicé benchmarks de rendimiento para optimizar tareas dedicadas, reduciendo significativamente el tiempo de cómputo y el uso de recursos.}
+      \resumeItem{Diseñé la arquitectura de microservicios de procesamiento de datos, con alto throughput, escalabilidad y comunicación confiable.}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Framework Elixir (Proyecto Personal)} $|$ \emph{Open Source, Microservicios} $|$ \href{https://github.com/pasaperez/elixir}{\underline{github.com/pasaperez/elixir}}}{Actualidad}
+    \resumeItemListStart
+      \resumeItem{Desarrollé un framework envoltorio que simplifica el desarrollo de microservicios con operaciones CRUD en APIs REST, acelerando los ciclos de desarrollo.}
+      \resumeItem{Capa base en Spring Boot con controladores, servicios y repositorios genéricos, APIResponse estandarizado, manejo global de errores, CORS y health: un CRUD REST completo requiere cuatro clases por entidad.}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Intereses Profesionales}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+   Abierto a: \textbf{Ingeniería Backend} $|$ \textbf{Desarrollo Full-Stack} $|$ \textbf{Liderazgo Técnico} $|$ \textbf{Platform Engineering} $|$ \textbf{Experto Técnico} $|$ \textbf{Ingeniería con IA}
+  }}
+\end{itemize}
+\end{document}

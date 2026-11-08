@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {SharedModule} from './shared/shared.module';
 
@@ -8,6 +8,7 @@ import {SharedModule} from './shared/shared.module';
   imports: [
     RouterOutlet, SharedModule
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <app-header></app-header>
     <main>
